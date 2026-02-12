@@ -973,6 +973,43 @@ a:focus,button:focus,input:focus,select:focus,textarea:focus{
     font-size:10.5px !important;
   }
 }
+/* ===== MOBILE FOOTER CENTER FIX ===== */
+@media (max-width:768px){
+
+  #site-footer{
+    text-align:center !important;
+    padding-left:16px !important;
+    padding-right:16px !important;
+  }
+
+  .footer-grid{
+    display:flex !important;
+    flex-direction:column !important;
+    align-items:center !important;
+    justify-content:center !important;
+    text-align:center !important;
+    gap:18px !important;
+    max-width:100% !important;
+  }
+
+  .footer-brand,
+  .footer-links,
+  .footer-contact{
+    width:100% !important;
+    text-align:center !important;
+  }
+
+  .footer-links ul{
+    padding:0 !important;
+  }
+
+  .footer-bottom{
+    text-align:center !important;
+    margin-top:10px !important;
+  }
+}
+
+
 
 
 
