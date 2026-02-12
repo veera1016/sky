@@ -984,35 +984,52 @@ a:focus,button:focus,input:focus,select:focus,textarea:focus{
   }
 }
 
-/* ===== MOBILE HERO GAP FIX (SAFE FOR LAPTOP) ===== */
+/* ================= FINAL MOBILE GAP REMOVE ================= */
 @media (max-width:768px){
 
+  /* Remove big hero height */
   .hero-section{
+    padding-top:85px !important;
+    padding-bottom:10px !important;
     min-height:auto !important;
     height:auto !important;
-    padding:95px 0 20px !important;
   }
 
+  /* Stack hero tightly */
   .hero-inner{
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    gap:10px;
+    display:flex !important;
+    flex-direction:column !important;
+    gap:8px !important;
   }
 
-  .hero-left{
+  /* Remove extra space below trust icons */
+  .hero-trust{
     margin-bottom:0 !important;
   }
 
+  /* Pull image upward */
   .hero-right{
-    margin-top:6px !important;
+    margin-top:0 !important;
   }
 
+  /* Fix image block */
+  .image-stack{
+    margin-bottom:0 !important;
+  }
+
+  /* Fix floating card space */
+  .floating-stat{
+    bottom:-8px !important;
+  }
+
+  /* Remove gap before next section */
   .services-area{
     margin-top:0 !important;
-    padding-top:20px !important;
+    padding-top:15px !important;
   }
+
 }
+
 
 
 
