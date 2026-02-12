@@ -618,5 +618,99 @@ a:focus,button:focus,input:focus,select:focus,textarea:focus{
   }
 }
 
+/* =====================================================
+   GLOBAL ALIGNMENT & SPACING FIX  (SAFE – NON BREAKING)
+   Fixes:
+   1) Left-right empty space (all pages)
+   2) Pickup section imbalance
+   3) Footer alignment + extra right gap
+===================================================== */
+
+
+/* ===== 1. REMOVE BIG LEFT-RIGHT SPACE ===== */
+.centered-container{
+  max-width:1320px;      /* expand usable width */
+  margin:0 auto;
+  padding:0 20px;
+}
+
+/* Allow main layout blocks full width */
+.hero-inner,
+.pickup-wrapper{
+  width:100%;
+}
+
+
+/* ===== 2. FIX PICKUP SECTION ALIGNMENT ===== */
+.pickup-wrapper{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:36px;
+  align-items:stretch;   /* equal height for both sides */
+}
+
+.pickup-info,
+.pickup-form-container{
+  width:100%;
+}
+
+
+/* ===== 3. FIX FOOTER ALIGNMENT ===== */
+.footer-grid{
+  max-width:1100px;
+  margin:0 auto;
+  grid-template-columns:1.2fr 1fr 1fr;
+  gap:28px;
+}
+
+/* Contact spacing clean */
+.footer-contact{
+  line-height:1.8;
+}
+
+/* Reduce extra right push */
+.footer-links{
+  padding-left:10px;
+}
+
+/* Footer bottom alignment */
+.footer-bottom{
+  text-align:left;
+}
+
+
+/* ===== RESPONSIVE ===== */
+
+/* Tablet */
+@media (max-width:1024px){
+  .centered-container{
+    max-width:100%;
+    padding:0 16px;
+  }
+
+  .pickup-wrapper{
+    grid-template-columns:1fr;
+  }
+
+  .footer-grid{
+    grid-template-columns:1fr 1fr;
+    max-width:700px;
+  }
+}
+
+/* Mobile */
+@media (max-width:768px){
+  .footer-grid{
+    grid-template-columns:1fr;
+    text-align:center;
+  }
+
+  .footer-bottom{
+    text-align:center;
+  }
+}
+
+
+
 
 
