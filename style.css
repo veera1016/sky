@@ -982,78 +982,73 @@ a:focus,button:focus,input:focus,select:focus,textarea:focus{
 }
 
 /* =====================================================
-   PERFECT MOBILE HERO FIX (No overlap, clean spacing)
+   FINAL MOBILE HERO COMPACT FIX (Clean + Tight Layout)
 ===================================================== */
 
 @media (max-width:768px){
 
-  /* ---------- HEADER COMPACT ---------- */
-  #site-header{
-    padding:4px 0 !important;
+  /* ---------- HEADER SMALL ---------- */
+  #navbar{
+    padding:6px 0 !important;
   }
 
   .nav-inner{
-    min-height:52px !important;
+    min-height:48px !important;
   }
 
   .nav-logo{
-    height:34px !important;
+    height:32px !important;
   }
 
-  /* ---------- HERO LAYOUT STACK ---------- */
-  .hero-inner{
-    flex-direction:column !important;
-    text-align:center !important;
-    gap:18px !important;
+  .brand-text .m-title{
+    font-size:15px !important;
   }
 
-  .hero-left{
-    order:1 !important;
+  .brand-text .s-title{
+    font-size:10px !important;
   }
 
-  .hero-right{
-    order:2 !important;
-    width:100% !important;
-    display:flex !important;
-    justify-content:center !important;
-  }
-
-  /* ---------- HERO IMAGE SMALL + CENTER ---------- */
-  .image-stack{
-    width:210px !important;
-    margin:10px auto 0 !important;
-    position:relative !important;
-  }
-
-  /* ---------- FIX STAT CARD POSITION ---------- */
-  .floating-stat{
-    position:absolute !important;
-    bottom:-12px !important;   /* sits nicely on image */
-    left:50% !important;
-    transform:translateX(-50%) !important;
-    padding:6px 12px !important;
-    border-radius:10px !important;
-    font-size:0.75rem !important;
-    min-width:auto !important;
-    box-shadow:0 6px 14px rgba(0,0,0,0.12) !important;
-  }
-
-  .floating-stat .stat-num{
-    font-size:1rem !important;
-  }
-
-  .floating-stat .stat-txt{
-    font-size:0.75rem !important;
-  }
-
-  /* ---------- REMOVE EXTRA HERO HEIGHT ---------- */
+  /* ---------- HERO REMOVE EXTRA HEIGHT ---------- */
   .hero-section{
-    padding-top:10px !important;
-    padding-bottom:20px !important;
+    padding-top:8px !important;
+    padding-bottom:12px !important;
     min-height:auto !important;
   }
 
+  .hero-inner{
+    gap:14px !important;
+  }
+
+  /* ---------- HERO IMAGE SMALL ---------- */
+  .image-stack{
+    width:180px !important;
+    margin:6px auto 0 !important;
+  }
+
+  /* ---------- STAT CARD SMALL + PERFECT ---------- */
+  .floating-stat{
+    bottom:-10px !important;
+    padding:5px 10px !important;
+    font-size:11px !important;
+    border-radius:10px !important;
+  }
+
+  .floating-stat .stat-num{
+    font-size:13px !important;
+  }
+
+  .floating-stat .stat-txt{
+    font-size:11px !important;
+  }
+
+  /* ---------- REMOVE BIG SPACE BELOW HERO ---------- */
+  .services-area{
+    margin-top:0 !important;
+    padding-top:30px !important;
+  }
+
 }
+
 
 
 
