@@ -982,68 +982,101 @@ a:focus,button:focus,input:focus,select:focus,textarea:focus{
 }
 
 /* =========================================
-   PERFECT MOBILE HERO (STACKED LAYOUT)
+   FINAL MOBILE FIX (SAFE — LAPTOP UNCHANGED)
    ========================================= */
 
-@media (max-width: 768px) {
+@media (max-width:768px){
 
-  /* Stack hero: text first, image below */
+  /* ---------- HEADER FIX ---------- */
+  #navbar{
+    padding:10px 0;
+  }
+
+  .nav-logo{
+    height:38px;
+  }
+
+  .brand-text .m-title{
+    font-size:16px;
+  }
+
+  .brand-text .s-title{
+    font-size:10px;
+  }
+
+  /* ---------- HERO LAYOUT ---------- */
   .hero-inner{
-    flex-direction: column;
-    text-align: center;
-    gap: 20px;
+    flex-direction:column;
+    text-align:center;
+    gap:18px;
   }
 
-  .hero-left{
-    order: 1;
-  }
-
+  .hero-left{order:1;}
   .hero-right{
-    order: 2;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    margin-top: 10px;
+    order:2;
+    width:100%;
+    display:flex;
+    justify-content:center;
+    margin-top:8px;
   }
 
-  /* Full image like your screenshot */
-  .main-hero-img{
-    width: 100%;
-    max-width: 340px;
-    border-radius: 18px;
-  }
-
-  /* Small floating card (bottom-left on image) */
-  .floating-stat{
-    position: absolute;
-    left: 18px;
-    bottom: -14px;
-    padding: 8px 12px;
-    border-radius: 10px;
-    font-size: 12px;
-    min-width: auto;
-  }
-
-  .floating-stat .stat-num{
-    font-size: 13px;
-    font-weight: 700;
-  }
-
-  .floating-stat .stat-txt{
-    font-size: 12px;
-  }
-
-  /* Prevent overlap into next section */
-  .services-area{
-    margin-top: 40px;
-  }
-
-  /* Reduce hero top space */
+  /* Reduce hero spacing */
   .hero-section{
-    padding: 85px 0 35px;
+    padding:90px 0 40px;
   }
-}
 
+  /* ---------- HERO IMAGE ---------- */
+  .image-stack{
+    max-width:340px;
+    margin:0 auto;
+  }
+
+  .main-hero-img{
+    width:100%;
+    border-radius:16px;
+  }
+
+  /* ---------- FLOATING CARD (99%) ---------- */
+  .floating-stat{
+    left:14px;
+    bottom:-10px;
+    padding:6px 10px;
+    border-radius:10px;
+    min-width:auto;
+  }
+
+  .stat-num{
+    font-size:13px;
+  }
+
+  .stat-txt{
+    font-size:12px;
+  }
+
+  /* ---------- TRUST ICON ALIGN ---------- */
+  .hero-trust{
+    justify-content:center;
+    gap:14px;
+  }
+
+  /* ---------- STOP IMAGE OVERLAP ---------- */
+  .services-area{
+    margin-top:45px;
+  }
+
+  /* ---------- FLOATING BUTTONS STABLE ---------- */
+  .floating-contacts{
+    bottom:18px;
+    right:14px;
+  }
+
+  .contact-btn{
+    width:46px;
+    height:46px;
+    font-size:18px;
+  }
+
+}
 
 
 
