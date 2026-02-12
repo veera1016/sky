@@ -984,6 +984,37 @@ a:focus,button:focus,input:focus,select:focus,textarea:focus{
   }
 }
 
+/* ===== FINAL MOBILE HERO TEXT VISIBILITY FIX ===== */
+@media (max-width:768px){
+
+  .hero-section{
+    padding-top:110px !important;
+  }
+
+  .hero-inner{
+    display:flex !important;
+    flex-direction:column !important;
+    align-items:center !important;
+  }
+
+  .hero-left{
+    order:1 !important;
+    width:100% !important;
+    display:block !important;
+  }
+
+  .hero-right{
+    order:2 !important;
+    margin-top:12px !important;
+  }
+
+  .hero-trust{
+    margin-top:14px !important;
+  }
+}
+
+
+
 
 
 
