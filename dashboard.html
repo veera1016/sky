@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Shipment Dashboard</title>
+<style>
+body{font-family:Arial;background:#f5f5f5;}
+.container{
+    width:80%;
+    margin:auto;
+    background:white;
+    padding:20px;
+    border-radius:8px;
+}
+input,textarea{
+    width:100%;
+    padding:8px;
+    margin:5px 0;
+}
+button{
+    background:#007bff;
+    color:white;
+    border:none;
+    padding:10px 15px;
+    cursor:pointer;
+}
+table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:20px;
+}
+table,th,td{
+    border:1px solid #ccc;
+}
+th{
+    background:#4CAF50;
+    color:white;
+}
+td,th{
+    padding:8px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>Manage Tracking IDs</h2>
+
+<label>Tracking ID</label>
+<input type="text" id="tracking">
+
+<label>Status Message</label>
+<textarea id="status"></textarea>
+
+<button onclick="addShipment()">Save & Update Shipment</button>
+
+<h3>AWB Details</h3>
+
+<table>
+<tr><td>AWB No.</td><td id="awb"></td></tr>
+<tr><td>Booking Date</td><td>10/02/2026</td></tr>
+<tr><td>Destination</td><td>Australia</td></tr>
+<tr><td>Status</td><td id="mainStatus"></td></tr>
+</table>
+
+<h3>Shipment Progress</h3>
+
+<table id="progress">
+<tr>
+<th>Date</th>
+<th>Time</th>
+<th>Location</th>
+<th>Activity</th>
+</tr>
+</table>
+
+</div>
+
+<script>
+
+function addShipment(){
+
+    var id = document.getElementById("tracking").value;
+    var status = document.getElementById("status").value;
+
+    document.getElementById("awb").innerHTML = id;
+    document.getElementById("mainStatus").innerHTML = status;
+
+    var table = document.getElementById("progress");
+
+    var row = table.insertRow(1);
+
+    var today = new Date();
+    var date = today.toLocaleDateString();
+    var time = today.getHours() + ":" + today.getMinutes();
+
+    row.insertCell(0).innerHTML = date;
+    row.insertCell(1).innerHTML = time;
+    row.insertCell(2).innerHTML = "Hyderabad";
+    row.insertCell(3).innerHTML = status;
+
+}
+</script>
+
+</body>
+</html>
