@@ -913,82 +913,73 @@ a:focus,button:focus,input:focus,select:focus,textarea:focus{
   }
 }
 
-/* =====================================================
-   FINAL MOBILE HERO VISUAL FIX (PERFECT)
-===================================================== */
+/* =========================================
+   FINAL MOBILE HERO GAP FIX (NO BIG SPACE)
+========================================= */
 
 @media (max-width:768px){
 
-  /* HERO spacing tighten */
+  /* Reduce hero height */
   .hero-section{
-    padding:55px 0 25px !important;
+    padding:50px 0 10px !important;
     min-height:auto !important;
   }
 
+  /* Remove gap between text & image */
   .hero-inner{
-    gap:10px !important;
+    display:flex !important;
+    flex-direction:column !important;
+    align-items:center !important;
+    gap:4px !important;
   }
 
-  /* TEXT block spacing */
+  /* Reduce bottom space under text */
   .hero-left{
-    margin-bottom:4px !important;
+    margin-bottom:0 !important;
+    padding-bottom:0 !important;
   }
 
-  /* IMAGE size reduce */
+  /* Pull image UP */
+  .hero-right{
+    margin-top:-20px !important;
+  }
+
+  /* Control image size */
   .image-stack{
-    max-width:220px !important;
-    margin:6px auto 0 !important;
+    max-width:240px !important;
+    margin:0 auto !important;
   }
 
-  .main-hero-img{
-    border-radius:16px !important;
-  }
-
-  /* FLOATING STAT centered */
+  /* Floating stat adjust */
   .floating-stat{
-    bottom:-6px !important;
+    bottom:-5px !important;
     padding:8px 14px !important;
     font-size:0.9rem !important;
   }
 
-  /* REMOVE BIG GAP AFTER HERO */
+  /* Remove extra space before next section */
   .services-area{
-    padding-top:18px !important;
-  }
-
-  /* MOVE FLOATING CONTACT ICONS LOWER */
-  .floating-contacts{
-    bottom:12px !important;
-    right:12px !important;
-  }
-
-  /* ICON SIZE SMALL */
-  .contact-btn{
-    width:42px !important;
-    height:42px !important;
-    font-size:16px !important;
-  }
-
-  /* Prevent overlap on hero image */
-  .hero-right{
-    margin-bottom:10px !important;
+    margin-top:0 !important;
+    padding-top:20px !important;
   }
 
 }
 
 
-/* EXTRA SMALL PHONES */
+/* EXTRA SMALL PHONE */
 @media (max-width:420px){
 
-  .image-stack{
-    max-width:200px !important;
+  .hero-right{
+    margin-top:-25px !important;
   }
 
-  .floating-contacts{
-    bottom:10px !important;
+  .image-stack{
+    max-width:220px !important;
   }
 
 }
+
+
 
 
 
