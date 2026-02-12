@@ -849,75 +849,70 @@ a:focus,button:focus,input:focus,select:focus,textarea:focus{
   }
 }
 
-/* ===================================================
-   HERO PERFECT BALANCE (Laptop Fix – Mobile Safe)
-=================================================== */
+/* =================================================
+   FINAL HERO IMAGE FIX (Laptop Only – Safe)
+================================================= */
 
-/* Hero layout balance */
-.hero-inner{
-  max-width:1200px;
-  margin:0 auto;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:40px;
-}
-
-/* Left text width control */
-.hero-left{
-  flex:0 1 580px;   /* prevent text from stretching too wide */
-}
-
-/* Right image centered */
+/* Make right hero area slightly bigger */
 .hero-right{
-  flex:0 1 420px;
+  flex:0 1 480px;
   display:flex;
   justify-content:center;
   align-items:center;
 }
 
-/* Image size control */
+/* Bigger image card */
 .image-stack{
+  max-width:420px;
   width:100%;
-  max-width:360px;
-  margin:0 auto;
+  position:relative;
 }
 
-/* Floating stat centered under image */
+/* Improve image look */
+.main-hero-img{
+  width:100%;
+  border-radius:18px;
+  box-shadow:0 18px 45px rgba(0,0,0,0.18);
+}
+
+/* Perfect floating stat position */
 .floating-stat{
+  position:absolute;
+  bottom:-18px;
   left:50%;
   transform:translateX(-50%);
-  bottom:-14px;
+  background:#ffffff;
+  padding:12px 18px;
+  border-radius:14px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.15);
+  font-weight:600;
+  text-align:center;
 }
 
-/* ===== Laptop large screens ===== */
+/* Large screens */
 @media (min-width:1400px){
-  .hero-inner{
-    max-width:1280px;
-  }
-}
-
-/* ===== Tablet ===== */
-@media (max-width:992px){
-  .hero-inner{
-    flex-direction:column;
-    text-align:center;
-  }
-  .hero-left,.hero-right{
-    flex:unset;
-    width:100%;
+  .hero-right{
+    flex:0 1 520px;
   }
   .image-stack{
-    max-width:300px;
+    max-width:460px;
   }
 }
 
-/* ===== Mobile (unchanged good layout) ===== */
+/* Tablet */
+@media (max-width:992px){
+  .image-stack{
+    max-width:320px;
+  }
+}
+
+/* Mobile (keep your good layout) */
 @media (max-width:768px){
   .image-stack{
     max-width:260px;
   }
 }
+
 
 
 
