@@ -952,62 +952,8 @@ a:focus,button:focus,input:focus,select:focus,textarea:focus{
     margin-top:0 !important;
     padding-top:12px !important;
   }
-   /* ===== MOBILE WIDTH / RIGHT WHITE SPACE FIX ===== */
-@media (max-width:768px){
-
-  html, body{
-    width:100%;
-    overflow-x:hidden;
-  }
-
-  /* Prevent any section from exceeding screen width */
-  .hero-section,
-  .hero-inner,
-  .centered-container,
-  .services-area,
-  .why-us-area,
-  .pickup-area,
-  .map-area,
-  #site-footer{
-    max-width:100%;
-    overflow-x:hidden;
-  }
-
-  /* Fix image or card pushing layout */
-  img, .image-stack, .main-hero-img{
-    max-width:100%;
-    height:auto;
-  }
-
 }
 
-/* ===== FINAL FIX — SHOW FULL PAGE BELOW HERO ===== */
-
-.hero-section{
-  height:auto !important;
-  min-height:auto !important;
-  overflow:visible !important;
-}
-
-/* Ensure next section visible */
-.services-area{
-  margin-top:0 !important;
-  position:relative;
-  z-index:1;
-}
-
-/* Prevent any section cutting content */
-section, .services-area, .why-us-area, .pickup-area, .map-area, #site-footer{
-  overflow:visible !important;
-}
-
-/* Remove fixed heights if any */
-.hero-inner{
-  height:auto !important;
-}
-
-
-}
 
 
 
