@@ -849,6 +849,78 @@ a:focus,button:focus,input:focus,select:focus,textarea:focus{
   }
 }
 
+/* ===================================================
+   HERO PERFECT BALANCE (Laptop Fix – Mobile Safe)
+=================================================== */
+
+/* Hero layout balance */
+.hero-inner{
+  max-width:1200px;
+  margin:0 auto;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:40px;
+}
+
+/* Left text width control */
+.hero-left{
+  flex:0 1 580px;   /* prevent text from stretching too wide */
+}
+
+/* Right image centered */
+.hero-right{
+  flex:0 1 420px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+/* Image size control */
+.image-stack{
+  width:100%;
+  max-width:360px;
+  margin:0 auto;
+}
+
+/* Floating stat centered under image */
+.floating-stat{
+  left:50%;
+  transform:translateX(-50%);
+  bottom:-14px;
+}
+
+/* ===== Laptop large screens ===== */
+@media (min-width:1400px){
+  .hero-inner{
+    max-width:1280px;
+  }
+}
+
+/* ===== Tablet ===== */
+@media (max-width:992px){
+  .hero-inner{
+    flex-direction:column;
+    text-align:center;
+  }
+  .hero-left,.hero-right{
+    flex:unset;
+    width:100%;
+  }
+  .image-stack{
+    max-width:300px;
+  }
+}
+
+/* ===== Mobile (unchanged good layout) ===== */
+@media (max-width:768px){
+  .image-stack{
+    max-width:260px;
+  }
+}
+
+
+
 
 
 
