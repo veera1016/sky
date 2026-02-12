@@ -952,7 +952,38 @@ a:focus,button:focus,input:focus,select:focus,textarea:focus{
     margin-top:0 !important;
     padding-top:12px !important;
   }
+   /* ===== MOBILE WIDTH / RIGHT WHITE SPACE FIX ===== */
+@media (max-width:768px){
+
+  html, body{
+    width:100%;
+    overflow-x:hidden;
+  }
+
+  /* Prevent any section from exceeding screen width */
+  .hero-section,
+  .hero-inner,
+  .centered-container,
+  .services-area,
+  .why-us-area,
+  .pickup-area,
+  .map-area,
+  #site-footer{
+    max-width:100%;
+    overflow-x:hidden;
+  }
+
+  /* Fix image or card pushing layout */
+  img, .image-stack, .main-hero-img{
+    max-width:100%;
+    height:auto;
+  }
+
 }
+
+}
+
+
 
 
 
