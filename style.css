@@ -981,6 +981,71 @@ a:focus,button:focus,input:focus,select:focus,textarea:focus{
 
 }
 
+/* =========================================
+   FIX HEADER HEIGHT (REMOVE TOP EMPTY SPACE)
+========================================= */
+
+@media (max-width:768px){
+
+  header#site-header{
+    padding:6px 0 !important;
+  }
+
+  .nav-inner{
+    min-height:58px !important;
+  }
+
+  .nav-logo{
+    height:38px !important;
+  }
+
+  .brand-text .m-title{
+    font-size:18px !important;
+  }
+
+  .brand-text .s-title{
+    font-size:11px !important;
+  }
+
+}
+
+
+/* =========================================
+   FIX HERO HEIGHT + STAT POSITION
+========================================= */
+
+@media (max-width:768px){
+
+  .hero-section{
+    padding:15px 0 0 !important;
+    min-height:auto !important;
+  }
+
+  .hero-left{
+    margin-bottom:6px !important;
+  }
+
+  .hero-right{
+    margin-top:-10px !important;
+  }
+
+  /* IMAGE SIZE */
+  .image-stack{
+    width:220px !important;
+    margin:0 auto !important;
+  }
+
+  /* FLOATING STAT — MOVE UP */
+  .floating-stat{
+    bottom:18px !important;   /* <-- THIS MOVES CARD UP */
+    padding:8px 14px !important;
+    font-size:0.9rem !important;
+  }
+
+}
+
+
+
 
 
 
