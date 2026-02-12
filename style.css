@@ -981,58 +981,69 @@ a:focus,button:focus,input:focus,select:focus,textarea:focus{
 
 }
 
-/* ===============================
-   HERO MOBILE PERFECT FIX
-   =============================== */
+/* =========================================
+   PERFECT MOBILE HERO (STACKED LAYOUT)
+   ========================================= */
 
 @media (max-width: 768px) {
 
-  /* Reduce hero height spacing */
-  .hero-section{
-    padding: 90px 0 40px !important;
+  /* Stack hero: text first, image below */
+  .hero-inner{
+    flex-direction: column;
+    text-align: center;
+    gap: 20px;
   }
 
-  /* Center hero image */
+  .hero-left{
+    order: 1;
+  }
+
   .hero-right{
+    order: 2;
     width: 100%;
     display: flex;
     justify-content: center;
-    align-items: center;
     margin-top: 10px;
   }
 
-  /* Make hero image responsive */
+  /* Full image like your screenshot */
   .main-hero-img{
     width: 100%;
-    max-width: 300px;
-    height: auto;
-    border-radius: 16px;
+    max-width: 340px;
+    border-radius: 18px;
   }
 
-  /* FIX floating stat card */
+  /* Small floating card (bottom-left on image) */
   .floating-stat{
     position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    bottom: -18px;
-    padding: 10px 14px;
-    border-radius: 12px;
+    left: 18px;
+    bottom: -14px;
+    padding: 8px 12px;
+    border-radius: 10px;
+    font-size: 12px;
     min-width: auto;
-    text-align: center;
   }
 
-  /* Reduce font size inside stat */
-  .floating-stat .stat-num,
+  .floating-stat .stat-num{
+    font-size: 13px;
+    font-weight: 700;
+  }
+
   .floating-stat .stat-txt{
-    font-size: 0.85rem;
-    line-height: 1.2;
+    font-size: 12px;
   }
 
-  /* Prevent overlap with next section */
+  /* Prevent overlap into next section */
   .services-area{
-    margin-top: 30px;
+    margin-top: 40px;
+  }
+
+  /* Reduce hero top space */
+  .hero-section{
+    padding: 85px 0 35px;
   }
 }
+
 
 
 
