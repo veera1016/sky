@@ -912,163 +912,80 @@ a:focus,button:focus,input:focus,select:focus,textarea:focus{
     max-width:260px;
   }
 }
-
-/* =====================================================
-   ABSOLUTE FINAL MOBILE HERO FIX (NO GAP / PERFECT)
-===================================================== */
+/* ================= FINAL MOBILE HERO (ONLY ONE) ================= */
 
 @media (max-width:768px){
 
-  /* HERO container */
   .hero-section{
-    padding:40px 0 0 !important;
-    min-height:auto !important;
+    padding:95px 0 40px;
+    background-attachment:scroll;
   }
-
-  /* FORCE single column layout */
-  .hero-inner{
-    display:block !important;
-  }
-
-  /* TEXT block */
-  .hero-left{
-    text-align:center !important;
-    margin-bottom:10px !important;
-  }
-
-  /* IMAGE block — pull up */
-  .hero-right{
-    margin-top:-10px !important;
-    text-align:center !important;
-  }
-
-  /* IMAGE size */
-  .image-stack{
-    width:220px !important;
-    max-width:85% !important;
-    margin:0 auto !important;
-  }
-
-  .main-hero-img{
-    width:100% !important;
-    height:auto !important;
-  }
-
-  /* FLOATING STAT */
-  .floating-stat{
-    bottom:-6px !important;
-    left:50% !important;
-    transform:translateX(-50%) !important;
-    padding:8px 14px !important;
-    font-size:0.9rem !important;
-  }
-
-  /* REMOVE GAP BEFORE NEXT SECTION */
-  .services-area{
-    margin-top:0 !important;
-    padding-top:20px !important;
-  }
-
-}
-
-
-/* SMALL PHONES */
-@media (max-width:420px){
-
-  .image-stack{
-    width:200px !important;
-  }
-
-}
-
-/* SIMPLE MOBILE HERO ALIGN (SAFE) */
-@media (max-width:768px){
 
   .hero-inner{
+    display:flex;
     flex-direction:column;
+    align-items:center;
     text-align:center;
+    gap:18px;
+  }
+
+  .hero-left{
+    width:100%;
+    order:1;
   }
 
   .hero-right{
-    margin-top:18px;
+    width:100%;
+    order:2;
+    display:flex;
+    justify-content:center;
+    margin-top:8px;
   }
 
   .image-stack{
-    max-width:300px;
+    max-width:320px;
+    width:100%;
     margin:0 auto;
   }
 
+  .main-hero-img{
+    width:100%;
+    border-radius:16px;
+  }
+
   .floating-stat{
+    position:absolute;
     left:50%;
     transform:translateX(-50%);
-    bottom:-14px;
-    min-width:auto;
-    padding:10px 14px;
+    bottom:-12px;
+    padding:8px 12px;
+    font-size:12px;
+    border-radius:10px;
   }
 
-}
-/* =========================================
-   PERFECT MOBILE HERO (STACKED LAYOUT)
-   ========================================= */
-
-@media (max-width: 768px) {
-
-  /* Stack hero: text first, image below */
-  .hero-inner{
-    flex-direction: column;
-    text-align: center;
-    gap: 20px;
+  .hero-ctas{
+    flex-direction:column;
+    gap:10px;
   }
 
-  .hero-left{
-    order: 1;
+  .btn-main,
+  .btn-outline{
+    width:100%;
+    justify-content:center;
   }
 
-  .hero-right{
-    order: 2;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    margin-top: 10px;
+  .hero-trust{
+    justify-content:center;
+    flex-wrap:wrap;
   }
 
-  /* Full image like your screenshot */
-  .main-hero-img{
-    width: 100%;
-    max-width: 340px;
-    border-radius: 18px;
-  }
-
-  /* Small floating card (bottom-left on image) */
-  .floating-stat{
-    position: absolute;
-    left: 18px;
-    bottom: -14px;
-    padding: 8px 12px;
-    border-radius: 10px;
-    font-size: 12px;
-    min-width: auto;
-  }
-
-  .floating-stat .stat-num{
-    font-size: 13px;
-    font-weight: 700;
-  }
-
-  .floating-stat .stat-txt{
-    font-size: 12px;
-  }
-
-  /* Prevent overlap into next section */
   .services-area{
-    margin-top: 40px;
-  }
-
-  /* Reduce hero top space */
-  .hero-section{
-    padding: 85px 0 35px;
+    margin-top:30px;
   }
 }
+
+
+
 
 
 
