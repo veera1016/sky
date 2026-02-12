@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sky Express | Professional Courier Logistics</title>
+    
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap');
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .glass-nav { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(10px); }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+
+        const App = () => {
+            const [trackNo, setTrackNo] = useState('');
+
+            // Initialize icons after React renders
+            useEffect(() => {
+                lucide.createIcons();
+            }, []);
+
+            const handleTrack = (e) => {
+                e.preventDefault();
+                if (!trackNo) return alert("Please enter tracking number");
+                const url = `https://wa.me/918121592299?text=Tracking Request: ${trackNo}`;
+                window.open(url, "_blank");
+            };
+
+            return (
+                <div className="min-h-screen bg-slate-50 text-slate-900">
+                    {/* Navigation */}
+                    <nav className="fixed w-full z-50 glass-nav border-b border-slate-200 px-6 py-4 flex justify-between items-center">
+                        <div className="text-2xl font-black text-blue-700 tracking-tighter">
+                            SKY<span className="text-red-600">EXPRESS</span>
+                        </div>
+                        <div className="hidden md:flex space-x-8 font-semibold text-sm uppercase">
+                            <a href="#services" className="hover:text-blue-600 transition">Services</a>
+                            <a href="#pickup" className="hover:text-blue-600 transition">Book Pickup</a>
+                            <a href="tel:+918121592299" className="bg-blue-700 text-white px-5 py-2 rounded-full flex items-center gap-2 hover:bg-blue-800 transition shadow-lg shadow-blue-200">
+                                Call Now
+                            </a>
+                        </div>
+                    </nav>
+
+                    {/* Hero Section */}
+                    <header className="pt-32 pb-20 px-6 bg-gradient-to-br from-blue-900 to-blue-700 text-white text-center md:text-left">
+                        <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+                            <div>
+                                <h1 className="text-5xl md:text-7xl font-extrabold mb-6 leading-tight">Fast. Safe.<br/><span className="text-red-400">Reliable.</span></h1>
+                                <p className="text-xl text-blue-100 mb-10 max-w-xl">Vizag's premier international and domestic courier service. Global reach with a local touch.</p>
+                                
+                                <form onSubmit={handleTrack} className="bg-white p-2 rounded-2xl flex flex-col md:flex-row gap-2 shadow-2xl max-w-md mx-auto md:mx-0">
+                                    <input 
+                                        type="text" 
+                                        className="flex-1 px-6 py-4 rounded-xl text-slate-900 outline-none"
+                                        placeholder="Tracking Number..."
+                                        value={trackNo}
+                                        onChange={(e) => setTrackNo(e.target.value)}
+                                    />
+                                    <button className="bg-red-600 hover:bg-red-700 px-8 py-4 rounded-xl font-bold transition">Track</button>
+                                </form>
+                            </div>
+                            <div className="hidden md:block opacity-10">
+                                <i data-lucide="globe" style={{width: '400px', height: '400px'}}></i>
+                            </div>
+                        </div>
+                    </header>
+
+                    {/* Services */}
+                    <section id="services" className="py-24 px-6 max-w-7xl mx-auto">
+                        <h2 className="text-4xl font-bold text-center mb-16">Expert Logistics Solutions</h2>
+                        <div className="grid md:grid-cols-3 gap-8 text-center">
+                            {[
+                                { title: "International", icon: "plane", desc: "Global shipping to 200+ countries." },
+                                { title: "Domestic Express", icon: "truck", desc: "Fastest delivery across all of India." },
+                                { title: "Local Pickup", icon: "package", desc: "Same-day pickup services in Vizag." }
+                            ].map((s, i) => (
+                                <div key={i} className="bg-white p-10 rounded-3xl border border-slate-100 shadow-xl shadow-slate-200/50 hover:-translate-y-2 transition duration-300">
+                                    <div className="bg-blue-50 w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-6 text-blue-600">
+                                        <i data-lucide={s.icon}></i>
+                                    </div>
+                                    <h3 className="text-xl font-bold mb-4">{s.title}</h3>
+                                    <p className="text-slate-500 leading-relaxed">{s.desc}</p>
+                                </div>
+                            ))}
+                        </div>
+                    </section>
+
+                    {/* Pickup Form (Simplified React Version) */}
+                    <section id="pickup" className="py-24 bg-slate-900 text-white px-6">
+                        <div className="max-w-4xl mx-auto bg-white text-slate-900 rounded-[2.5rem] p-8 md:p-12 shadow-2xl">
+                            <h2 className="text-3xl font-bold mb-8 text-center">Schedule a Doorstep Pickup</h2>
+                            <form className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <input className="bg-slate-50 border p-4 rounded-xl outline-none focus:ring-2 ring-blue-500" placeholder="Your Name" />
+                                <input className="bg-slate-50 border p-4 rounded-xl outline-none focus:ring-2 ring-blue-500" placeholder="Phone Number" />
+                                <input className="bg-slate-50 border p-4 rounded-xl outline-none focus:ring-2 ring-blue-500 md:col-span-2" placeholder="Full Pickup Address" />
+                                <button type="button" className="md:col-span-2 bg-red-600 text-white py-5 rounded-2xl font-black text-lg hover:bg-red-700 transition tracking-wider">
+                                    CONFIRM VIA WHATSAPP
+                                </button>
+                            </form>
+                        </div>
+                    </section>
+
+                    {/* Footer */}
+                    <footer className="py-12 text-center text-slate-400 text-sm border-t border-slate-200">
+                        <p>© 2026 Sky Express International Couriers. Plot No: 5, Old Dairy Farm, Vizag.</p>
+                    </footer>
+                </div>
+            );
+        };
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>
