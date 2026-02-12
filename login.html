@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Admin Login | SKY EXPRESS</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body style="background: #f8fbff; display: flex; align-items: center; justify-content: center; height: 100vh;">
+  <div class="pickup-form-container" style="max-width: 400px; width: 90%;">
+    <h2 style="text-align: center;">Admin Login</h2>
+    <input type="password" id="adminPass" placeholder="Enter Admin Password" style="width: 100%; padding: 12px; margin: 20px 0; border: 1px solid #ddd; border-radius: 8px;">
+    <button onclick="checkLogin()" class="btn-main" style="width: 100%;">Access Dashboard</button>
+  </div>
+
+  <script>
+    function checkLogin() {
+      const pass = document.getElementById('adminPass').value;
+      if(pass === "admin123") { // YOU CAN CHANGE THIS PASSWORD
+        sessionStorage.setItem('isAdmin', 'true');
+        window.location.href = 'admin.html';
+      } else {
+        alert("Incorrect Password");
+      }
+    }
+  </script>
+</body>
+</html>
