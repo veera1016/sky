@@ -914,86 +914,80 @@ a:focus,button:focus,input:focus,select:focus,textarea:focus{
 }
 
 /* =====================================================
-   FINAL PERMANENT MOBILE FIX
+   FINAL MOBILE HERO VISUAL FIX (PERFECT)
 ===================================================== */
 
 @media (max-width:768px){
 
-  /* REMOVE HERO HEIGHT ISSUE */
+  /* HERO spacing tighten */
   .hero-section{
-    background-attachment:scroll !important;
+    padding:55px 0 25px !important;
     min-height:auto !important;
-    padding:60px 0 30px !important;
   }
 
-  /* FORCE CORRECT HERO ORDER */
   .hero-inner{
-    display:flex !important;
-    flex-direction:column !important;
-    align-items:center !important;
-    text-align:center !important;
-    gap:12px !important;
+    gap:10px !important;
   }
 
+  /* TEXT block spacing */
   .hero-left{
-    order:1 !important;
-    width:100% !important;
+    margin-bottom:4px !important;
   }
 
-  .hero-right{
-    order:2 !important;
-    width:100% !important;
-    margin-top:8px !important;
-    display:flex !important;
-    justify-content:center !important;
-  }
-
-  /* HERO IMAGE SIZE */
+  /* IMAGE size reduce */
   .image-stack{
-    max-width:240px !important;
-    margin:0 auto !important;
+    max-width:220px !important;
+    margin:6px auto 0 !important;
   }
 
+  .main-hero-img{
+    border-radius:16px !important;
+  }
+
+  /* FLOATING STAT centered */
   .floating-stat{
-    bottom:-8px !important;
+    bottom:-6px !important;
+    padding:8px 14px !important;
+    font-size:0.9rem !important;
   }
 
   /* REMOVE BIG GAP AFTER HERO */
   .services-area{
-    padding-top:25px !important;
+    padding-top:18px !important;
   }
 
-  /* FIX FLOATING ICON JUMP */
+  /* MOVE FLOATING CONTACT ICONS LOWER */
   .floating-contacts{
-    position:fixed !important;
-    right:14px !important;
-    bottom:18px !important;
-    transform:none !important;
+    bottom:12px !important;
+    right:12px !important;
   }
 
+  /* ICON SIZE SMALL */
   .contact-btn{
-    width:44px !important;
-    height:44px !important;
-    font-size:17px !important;
+    width:42px !important;
+    height:42px !important;
+    font-size:16px !important;
   }
 
-  /* STOP HORIZONTAL SCROLL */
-  body{
-    overflow-x:hidden !important;
+  /* Prevent overlap on hero image */
+  .hero-right{
+    margin-bottom:10px !important;
   }
+
 }
 
 
-/* SMALL PHONES */
+/* EXTRA SMALL PHONES */
 @media (max-width:420px){
 
-  .hero-section{
-    padding:50px 0 25px !important;
+  .image-stack{
+    max-width:200px !important;
   }
 
-  .image-stack{
-    max-width:210px !important;
+  .floating-contacts{
+    bottom:10px !important;
   }
+
 }
 
 
