@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>AWB Entry</title>
+
+<style>
+body{
+    font-family: Arial;
+    background:#f5f5f5;
+}
+.container{
+    width:80%;
+    margin:auto;
+    background:white;
+    padding:20px;
+    border-radius:8px;
+}
+input{
+    width:100%;
+    padding:8px;
+    margin:6px 0;
+}
+button{
+    padding:10px 15px;
+    background:#007bff;
+    color:white;
+    border:none;
+    cursor:pointer;
+}
+table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:20px;
+}
+td{
+    border:1px solid #2ecc71;
+    padding:10px;
+}
+.label{
+    width:30%;
+    font-weight:bold;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>Add AWB Details</h2>
+
+<input type="text" id="awb" placeholder="AWB No">
+<input type="text" id="date" placeholder="Booking Date (DD/MM/YYYY)">
+<input type="text" id="consignee" placeholder="Consignee Name">
+<input type="text" id="destination" placeholder="Destination">
+<input type="text" id="status" placeholder="Status">
+<input type="text" id="deliveryDate" placeholder="Delivery Date & Time">
+<input type="text" id="receiver" placeholder="Receiver Name">
+<input type="text" id="deliveryAwb" placeholder="Delivery AWB No">
+
+<button onclick="showAWB()">Save & Show</button>
+
+<h3>AWB Details</h3>
+
+<table>
+<tr><td class="label">AWB No.</td><td id="o_awb"></td></tr>
+<tr><td class="label">Booking Date</td><td id="o_date"></td></tr>
+<tr><td class="label">Consignee Name</td><td id="o_consignee"></td></tr>
+<tr><td class="label">Destination</td><td id="o_destination"></td></tr>
+<tr><td class="label">Status</td><td id="o_status"></td></tr>
+<tr><td class="label">Delivery Date and Time</td><td id="o_deliveryDate"></td></tr>
+<tr><td class="label">Receiver Name</td><td id="o_receiver"></td></tr>
+<tr><td class="label">Delivery AWB No.</td><td id="o_deliveryAwb"></td></tr>
+</table>
+
+</div>
+
+<script>
+
+function showAWB(){
+
+document.getElementById("o_awb").innerHTML =
+document.getElementById("awb").value;
+
+document.getElementById("o_date").innerHTML =
+document.getElementById("date").value;
+
+document.getElementById("o_consignee").innerHTML =
+document.getElementById("consignee").value;
+
+document.getElementById("o_destination").innerHTML =
+document.getElementById("destination").value;
+
+document.getElementById("o_status").innerHTML =
+document.getElementById("status").value;
+
+document.getElementById("o_deliveryDate").innerHTML =
+document.getElementById("deliveryDate").value;
+
+document.getElementById("o_receiver").innerHTML =
+document.getElementById("receiver").value;
+
+document.getElementById("o_deliveryAwb").innerHTML =
+document.getElementById("deliveryAwb").value;
+
+}
+
+</script>
+
+</body>
+</html>
