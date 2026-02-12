@@ -981,6 +981,34 @@ a:focus,button:focus,input:focus,select:focus,textarea:focus{
 
 }
 
+/* SIMPLE MOBILE HERO ALIGN (SAFE) */
+@media (max-width:768px){
+
+  .hero-inner{
+    flex-direction:column;
+    text-align:center;
+  }
+
+  .hero-right{
+    margin-top:18px;
+  }
+
+  .image-stack{
+    max-width:300px;
+    margin:0 auto;
+  }
+
+  .floating-stat{
+    left:50%;
+    transform:translateX(-50%);
+    bottom:-14px;
+    min-width:auto;
+    padding:10px 14px;
+  }
+
+}
+
+
 
 
 
