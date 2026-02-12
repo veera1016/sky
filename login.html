@@ -1,27 +1,61 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="utf-8">
-  <title>Admin Login | SKY EXPRESS</title>
-  <link rel="stylesheet" href="style.css">
+<title>Shipment Login</title>
+<style>
+body{
+    font-family: Arial;
+    background:#f2f2f2;
+}
+.login-box{
+    width:350px;
+    margin:120px auto;
+    background:white;
+    padding:20px;
+    border-radius:8px;
+    box-shadow:0 0 10px gray;
+    text-align:center;
+}
+input{
+    width:90%;
+    padding:10px;
+    margin:10px;
+}
+button{
+    padding:10px 20px;
+    background:#007bff;
+    color:white;
+    border:none;
+    cursor:pointer;
+}
+</style>
 </head>
-<body style="background: #f8fbff; display: flex; align-items: center; justify-content: center; height: 100vh;">
-  <div class="pickup-form-container" style="max-width: 400px; width: 90%;">
-    <h2 style="text-align: center;">Admin Login</h2>
-    <input type="password" id="adminPass" placeholder="Enter Admin Password" style="width: 100%; padding: 12px; margin: 20px 0; border: 1px solid #ddd; border-radius: 8px;">
-    <button onclick="checkLogin()" class="btn-main" style="width: 100%;">Access Dashboard</button>
-  </div>
 
-  <script>
-    function checkLogin() {
-      const pass = document.getElementById('adminPass').value;
-      if(pass === "admin123") { // YOU CAN CHANGE THIS PASSWORD
-        sessionStorage.setItem('isAdmin', 'true');
-        window.location.href = 'admin.html';
-      } else {
-        alert("Incorrect Password");
-      }
+<body>
+
+<div class="login-box">
+<h2>Login</h2>
+
+<input type="text" id="user" placeholder="Username"><br>
+<input type="password" id="pass" placeholder="Password"><br>
+
+<button onclick="login()">Login</button>
+
+<p id="msg" style="color:red;"></p>
+</div>
+
+<script>
+function login(){
+    var u = document.getElementById("user").value;
+    var p = document.getElementById("pass").value;
+
+    if(u=="admin" && p=="admin123"){
+        window.location.href="dashboard.html";
+    }else{
+        document.getElementById("msg").innerHTML="Invalid Login";
     }
-  </script>
+}
+</script>
+
 </body>
 </html>
