@@ -981,65 +981,58 @@ a:focus,button:focus,input:focus,select:focus,textarea:focus{
 
 }
 
-/* =========================================
-   ULTRA FINAL MOBILE HERO PERFECT FIX
-========================================= */
+/* ===============================
+   HERO MOBILE PERFECT FIX
+   =============================== */
 
-@media (max-width:768px){
+@media (max-width: 768px) {
 
-  /* ---- Make header ultra compact ---- */
-  #navbar{
-    padding:4px 0 !important;
-  }
-
-  .nav-inner{
-    min-height:44px !important;
-  }
-
-  .nav-logo{
-    height:30px !important;
-  }
-
-  /* ---- Reduce hero top spacing ---- */
+  /* Reduce hero height spacing */
   .hero-section{
-    padding-top:4px !important;
-    padding-bottom:10px !important;
+    padding: 90px 0 40px !important;
   }
 
-  .hero-inner{
-    gap:10px !important;
+  /* Center hero image */
+  .hero-right{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
   }
 
-  /* ---- Perfect image size ---- */
-  .image-stack{
-    width:160px !important;
-    margin:0 auto !important;
+  /* Make hero image responsive */
+  .main-hero-img{
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    border-radius: 16px;
   }
 
-  /* ---- Move stat card slightly down ---- */
+  /* FIX floating stat card */
   .floating-stat{
-    bottom:-6px !important;
-    padding:4px 8px !important;
-    font-size:10px !important;
-    border-radius:8px !important;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: -18px;
+    padding: 10px 14px;
+    border-radius: 12px;
+    min-width: auto;
+    text-align: center;
   }
 
-  .floating-stat .stat-num{
-    font-size:12px !important;
-  }
-
+  /* Reduce font size inside stat */
+  .floating-stat .stat-num,
   .floating-stat .stat-txt{
-    font-size:10px !important;
+    font-size: 0.85rem;
+    line-height: 1.2;
   }
 
-  /* ---- Remove extra space before next section ---- */
+  /* Prevent overlap with next section */
   .services-area{
-    margin-top:0 !important;
-    padding-top:25px !important;
+    margin-top: 30px;
   }
-
 }
-
 
 
 
