@@ -912,123 +912,49 @@ a:focus,button:focus,input:focus,select:focus,textarea:focus{
     max-width:260px;
   }
 }
-/* ================= FINAL MOBILE HERO (ONLY ONE) ================= */
-
+/* ===== MOBILE HERO GAP FINAL FIX (CLEAN & SAFE) ===== */
 @media (max-width:768px){
 
   .hero-section{
-    padding:95px 0 40px;
+    padding:90px 0 5px !important;
+    min-height:auto !important;
+    height:auto !important;
     background-attachment:scroll;
   }
 
   .hero-inner{
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    text-align:center;
-    gap:18px;
+    display:block !important;
   }
 
   .hero-left{
-    width:100%;
-    order:1;
+    margin-bottom:5px !important;
   }
 
   .hero-right{
-    width:100%;
-    order:2;
-    display:flex;
-    justify-content:center;
-    margin-top:8px;
-  }
-
-  .image-stack{
-    max-width:320px;
-    width:100%;
-    margin:0 auto;
-  }
-
-  .main-hero-img{
-    width:100%;
-    border-radius:16px;
-  }
-
-  .floating-stat{
-    position:absolute;
-    left:50%;
-    transform:translateX(-50%);
-    bottom:-12px;
-    padding:8px 12px;
-    font-size:12px;
-    border-radius:10px;
-  }
-
-  .hero-ctas{
-    flex-direction:column;
-    gap:10px;
-  }
-
-  .btn-main,
-  .btn-outline{
-    width:100%;
-    justify-content:center;
-  }
-
-  .hero-trust{
-    justify-content:center;
-    flex-wrap:wrap;
-  }
-
-  .services-area{
-    margin-top:30px;
-  }
-}
-
-/* ================= FINAL MOBILE GAP REMOVE ================= */
-@media (max-width:768px){
-
-  /* Remove big hero height */
-  .hero-section{
-    padding-top:85px !important;
-    padding-bottom:10px !important;
-    min-height:auto !important;
+    margin:0 !important;
+    padding:0 !important;
     height:auto !important;
   }
 
-  /* Stack hero tightly */
-  .hero-inner{
-    display:flex !important;
-    flex-direction:column !important;
-    gap:8px !important;
+  .image-stack{
+    margin:0 auto !important;
   }
 
-  /* Remove extra space below trust icons */
+  .floating-stat{
+    bottom:-6px !important;
+  }
+
   .hero-trust{
     margin-bottom:0 !important;
   }
 
-  /* Pull image upward */
-  .hero-right{
-    margin-top:0 !important;
-  }
-
-  /* Fix image block */
-  .image-stack{
-    margin-bottom:0 !important;
-  }
-
-  /* Fix floating card space */
-  .floating-stat{
-    bottom:-8px !important;
-  }
-
-  /* Remove gap before next section */
   .services-area{
     margin-top:0 !important;
-    padding-top:15px !important;
+    padding-top:12px !important;
   }
-
 }
+
+
 
 
 
