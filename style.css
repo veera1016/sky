@@ -710,6 +710,59 @@ a:focus,button:focus,input:focus,select:focus,textarea:focus{
   }
 }
 
+/* ===============================
+   FINAL FOOTER CENTER BALANCE
+=============================== */
+
+.footer-grid{
+  max-width:1000px;           /* bring columns closer to center */
+  margin:0 auto;              /* center footer block */
+  grid-template-columns:1.1fr 1fr 1fr;  /* better visual balance */
+  gap:24px;
+}
+
+/* Center visual weight */
+.footer-brand{
+  max-width:280px;
+}
+
+/* Contact spacing */
+.footer-contact{
+  line-height:1.9;
+}
+
+/* Pull quick links slightly left */
+.footer-links{
+  padding-left:0;
+}
+
+/* Footer bottom align with content */
+.footer-bottom{
+  max-width:1000px;
+  margin:20px auto 0;
+  text-align:left;
+}
+
+/* Tablet */
+@media (max-width:1024px){
+  .footer-grid{
+    grid-template-columns:1fr 1fr;
+    max-width:700px;
+  }
+}
+
+/* Mobile */
+@media (max-width:768px){
+  .footer-grid{
+    grid-template-columns:1fr;
+    text-align:center;
+  }
+  .footer-bottom{
+    text-align:center;
+  }
+}
+
+
 
 
 
