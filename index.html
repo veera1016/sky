@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sky Express | Premium Global Logistics</title>
+    <title>Sky Express | Premium International Logistics</title>
     
     <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
@@ -14,38 +14,34 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap');
         
-        :root {
-            --primary: #0f172a;
-            --accent: #2563eb;
-        }
-
         body { 
             font-family: 'Plus Jakarta Sans', sans-serif; 
-            background-color: #f8fafc;
-            color: #0f172a;
+            scroll-behavior: smooth;
         }
 
-        .glass-card {
-            background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(0, 0, 0, 0.05);
+        .glass-header {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
         }
 
-        .hero-mesh {
-            background-color: #0f172a;
-            background-image: 
-                radial-gradient(at 0% 0%, hsla(223,81%,33%,1) 0, transparent 50%), 
-                radial-gradient(at 50% 0%, hsla(221,75%,45%,1) 0, transparent 50%), 
-                radial-gradient(at 100% 0%, hsla(220,90%,56%,1) 0, transparent 50%);
+        .gradient-overlay {
+            background: linear-gradient(to right, rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.4));
+        }
+        
+        .hero-bg {
+            background-image: url('https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=2070&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
         }
 
-        .input-focus:focus {
-            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
-            border-color: #2563eb;
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
         }
     </style>
 </head>
-<body>
+<body class="bg-slate-50 text-slate-900">
     <div id="root"></div>
 
     <script type="text/babel">
@@ -53,138 +49,156 @@
 
         const App = () => {
             const [trackId, setTrackId] = useState('');
-            const [form, setForm] = useState({ name: '', phone: '', from: '', to: '' });
+            const [formData, setFormData] = useState({
+                name: '', phone: '', pickup: '', delivery: '', type: '', note: ''
+            });
 
             useEffect(() => {
                 lucide.createIcons();
             }, []);
 
-            const handleWhatsApp = (e, type) => {
+            const sendWhatsApp = (e, type) => {
                 e.preventDefault();
-                let message = "";
-                if (type === 'track') {
-                    if (!trackId) return alert("Please enter tracking ID");
-                    message = `Hello Sky Express, I'd like to track shipment: ${trackId}`;
+                let text = "";
+                if(type === 'track') {
+                    if(!trackId) return alert("Please enter a tracking number");
+                    text = `Hello Sky Express! I'd like to track my shipment. ID: ${trackId}`;
                 } else {
-                    message = `Pickup Request:\nName: ${form.name}\nPhone: ${form.phone}\nFrom: ${form.from}\nTo: ${form.to}`;
+                    if(!formData.name || !formData.phone) return alert("Please fill required fields");
+                    text = `*New Pickup Request*\nName: ${formData.name}\nPhone: ${formData.phone}\nFrom: ${formData.pickup}\nTo: ${formData.delivery}\nType: ${formData.type}\nNote: ${formData.note}`;
                 }
-                window.open(`https://wa.me/918121592299?text=${encodeURIComponent(message)}`, "_blank");
+                window.open(`https://wa.me/918121592299?text=${encodeURIComponent(text)}`, "_blank");
             };
 
             return (
                 <div className="min-h-screen">
                     {/* Navigation */}
-                    <nav className="fixed w-full z-50 bg-white/80 backdrop-blur-md border-b border-slate-100 px-6 py-4">
+                    <nav className="fixed w-full z-50 glass-header px-6 py-4">
                         <div className="max-w-7xl mx-auto flex justify-between items-center">
-                            <div className="text-2xl font-black tracking-tighter text-slate-900">
-                                SKY<span className="text-blue-600">EXPRESS</span>
+                            <div className="text-2xl font-black tracking-tighter text-blue-700 italic">
+                                SKY<span className="text-red-600">EXPRESS</span>
                             </div>
-                            <div className="hidden md:flex space-x-10 text-sm font-bold text-slate-500">
+                            <div className="hidden md:flex space-x-8 text-sm font-bold text-slate-600">
                                 <a href="#services" className="hover:text-blue-600 transition">Services</a>
                                 <a href="#pickup" className="hover:text-blue-600 transition">Book Pickup</a>
                                 <a href="#contact" className="hover:text-blue-600 transition">Contact</a>
                             </div>
-                            <a href="tel:+918121592299" className="bg-blue-600 text-white px-6 py-2.5 rounded-full font-bold text-sm shadow-lg shadow-blue-200 hover:scale-105 transition-transform">
-                                Call Now
+                            <a href="tel:+918121592299" className="bg-red-600 text-white px-6 py-2.5 rounded-full font-bold text-sm hover:bg-red-700 transition shadow-lg shadow-red-200">
+                                Call Support
                             </a>
                         </div>
                     </nav>
 
                     {/* Hero Section */}
-                    <header className="hero-mesh pt-48 pb-32 px-6 text-white text-center">
-                        <div className="max-w-4xl mx-auto">
-                            <h1 className="text-5xl md:text-7xl font-extrabold mb-8 tracking-tight">
-                                Delivering Trust <br/> Across the <span className="text-blue-400 italic">Globe.</span>
-                            </h1>
-                            <p className="text-xl text-slate-300 mb-12 max-w-2xl mx-auto font-light leading-relaxed">
-                                Premium international courier solutions based in Vizag. 
-                                Secure, fast, and transparent logistics at your fingertips.
-                            </p>
-                            
-                            {/* Tracking Widget */}
-                            <div id="track" className="bg-white p-2 rounded-2xl flex flex-col md:flex-row gap-2 shadow-2xl max-w-2xl mx-auto overflow-hidden">
-                                <input 
-                                    type="text" 
-                                    placeholder="Enter Tracking ID..."
-                                    className="flex-1 px-6 py-4 text-slate-900 outline-none font-semibold"
-                                    value={trackId}
-                                    onChange={(e) => setTrackId(e.target.value)}
-                                />
-                                <button 
-                                    onClick={(e) => handleWhatsApp(e, 'track')}
-                                    className="bg-blue-600 hover:bg-blue-700 px-10 py-4 rounded-xl font-bold transition flex items-center justify-center gap-2"
-                                >
-                                    <i data-lucide="search" className="w-5 h-5"></i> Track Now
-                                </button>
+                    <header className="relative h-screen flex items-center hero-bg">
+                        <div className="absolute inset-0 gradient-overlay"></div>
+                        <div className="relative z-10 max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center text-white">
+                            <div>
+                                <h1 className="text-6xl md:text-8xl font-extrabold leading-none mb-6">
+                                    Global <br/><span className="text-blue-400">Logistics</span> <br/>Hub.
+                                </h1>
+                                <p className="text-xl text-slate-300 mb-10 max-w-lg">
+                                    Fast, Safe, and Reliable International & Domestic courier services based in Visakhapatnam.
+                                </p>
+                                
+                                <div className="flex bg-white rounded-2xl p-2 shadow-2xl max-w-md">
+                                    <input 
+                                        type="text" 
+                                        className="flex-1 px-4 text-slate-900 outline-none font-semibold"
+                                        placeholder="Track Shipment ID..."
+                                        onChange={(e) => setTrackId(e.target.value)}
+                                    />
+                                    <button onClick={(e) => sendWhatsApp(e, 'track')} className="bg-blue-600 px-8 py-4 rounded-xl font-bold hover:bg-blue-700 transition">
+                                        Track
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </header>
 
-                    {/* Service Grid */}
+                    {/* Services Section */}
                     <section id="services" className="py-32 px-6 max-w-7xl mx-auto">
                         <div className="text-center mb-20">
-                            <span className="text-blue-600 font-black text-xs uppercase tracking-widest">Our Expertise</span>
-                            <h2 className="text-4xl font-extrabold mt-4">Why Choose Sky Express?</h2>
+                            <h2 className="text-4xl font-black mb-4 uppercase tracking-tighter">Our Core Expertise</h2>
+                            <div className="h-1.5 w-24 bg-blue-600 mx-auto rounded-full"></div>
                         </div>
-                        
-                        <div className="grid md:grid-cols-3 gap-8">
+
+                        <div className="grid md:grid-cols-3 gap-10">
                             {[
-                                { title: "Air Cargo", icon: "plane", desc: "Fastest international shipping to over 200 countries." },
-                                { title: "Surface Hub", icon: "truck", desc: "Reliable domestic courier network across India." },
-                                { title: "Secure Pack", icon: "shield", desc: "Specialized fragile item packing and full insurance." }
+                                { title: "International Express", img: "https://images.unsplash.com/photo-1436491865332-7a61a109c0f3?q=80&w=2070", desc: "Global reach to 200+ countries with door-to-door delivery." },
+                                { title: "Domestic Courier", img: "https://images.unsplash.com/photo-1519003722824-192d992a6058?q=80&w=2012", desc: "Express delivery across India with priority handling." },
+                                { title: "Cargo Services", img: "https://images.unsplash.com/photo-1578575437130-527eed3abbec?q=80&w=2070", desc: "Bulk logistics and air freight solutions for businesses." }
                             ].map((s, i) => (
-                                <div key={i} className="glass-card p-12 rounded-[2.5rem] hover:-translate-y-3 transition-all duration-500 group">
-                                    <div className="w-16 h-16 bg-blue-50 rounded-2xl flex items-center justify-center mb-8 text-blue-600 group-hover:bg-blue-600 group-hover:text-white transition-colors">
-                                        <i data-lucide={s.icon} className="w-8 h-8"></i>
+                                <div key={i} className="bg-white rounded-[2rem] overflow-hidden service-card transition-all duration-500">
+                                    <img src={s.img} alt={s.title} className="h-48 w-full object-cover" />
+                                    <div className="p-10 text-center">
+                                        <h3 className="text-2xl font-bold mb-4">{s.title}</h3>
+                                        <p className="text-slate-500 text-sm leading-relaxed">{s.desc}</p>
                                     </div>
-                                    <h3 className="text-2xl font-bold mb-4">{s.title}</h3>
-                                    <p className="text-slate-500 leading-relaxed">{s.desc}</p>
                                 </div>
                             ))}
                         </div>
                     </section>
 
-                    {/* Professional Pickup Form */}
-                    <section id="pickup" className="py-24 bg-slate-900 px-6">
-                        <div className="max-w-5xl mx-auto glass-card rounded-[3rem] overflow-hidden flex flex-col md:flex-row shadow-3xl">
-                            <div className="bg-blue-600 p-16 text-white md:w-1/2 flex flex-col justify-center">
-                                <h2 className="text-4xl font-bold mb-6 italic">Schedule a Pickup</h2>
-                                <p className="text-blue-100 text-lg mb-8">Save time with our doorstep collection service in Vizag city.</p>
-                                <div className="space-y-4">
-                                    <div className="flex items-center gap-4"><i data-lucide="clock" className="w-5 h-5"></i> On-Time Guarantee</div>
-                                    <div className="flex items-center gap-4"><i data-lucide="map-pin" className="w-5 h-5"></i> City-Wide Coverage</div>
+                    {/* Booking Form */}
+                    <section id="pickup" className="py-32 bg-slate-900 text-white px-6">
+                        <div className="max-w-6xl mx-auto bg-white text-slate-900 rounded-[3rem] overflow-hidden flex flex-col md:flex-row shadow-3xl">
+                            <div className="bg-blue-600 p-16 md:w-1/3 flex flex-col justify-center text-white">
+                                <h2 className="text-4xl font-black mb-6 italic">Instant Pickup</h2>
+                                <p className="text-blue-100 mb-10 leading-relaxed">Save time by booking a collection from your doorstep in Vizag.</p>
+                                <div className="space-y-6 text-sm font-bold">
+                                    <div className="flex items-center gap-4"><i data-lucide="shield-check"></i> Secure Handling</div>
+                                    <div className="flex items-center gap-4"><i data-lucide="truck"></i> Verified Logistics</div>
                                 </div>
                             </div>
-                            <div className="p-16 md:w-1/2 bg-white">
-                                <form className="space-y-6">
-                                    <input className="w-full border-b-2 border-slate-100 py-3 outline-none input-focus transition-all" placeholder="Your Name" onChange={e => setForm({...form, name: e.target.value})} />
-                                    <input className="w-full border-b-2 border-slate-100 py-3 outline-none input-focus transition-all" placeholder="Phone Number" onChange={e => setForm({...form, phone: e.target.value})} />
-                                    <input className="w-full border-b-2 border-slate-100 py-3 outline-none input-focus transition-all" placeholder="Pickup Address" onChange={e => setForm({...form, from: e.target.value})} />
-                                    <input className="w-full border-b-2 border-slate-100 py-3 outline-none input-focus transition-all" placeholder="Destination City" onChange={e => setForm({...form, to: e.target.value})} />
-                                    <button 
-                                        onClick={(e) => handleWhatsApp(e, 'pickup')}
-                                        className="w-full bg-slate-900 text-white py-5 rounded-2xl font-bold hover:bg-blue-600 transition shadow-xl"
-                                    >
-                                        Request via WhatsApp
-                                    </button>
-                                </form>
-                            </div>
+                            <form className="p-16 md:w-2/3 grid md:grid-cols-2 gap-6 bg-white" onSubmit={(e) => sendWhatsApp(e, 'pickup')}>
+                                <input className="border-b-2 border-slate-100 p-3 outline-none focus:border-blue-600 transition" placeholder="Your Name *" required onChange={e => setFormData({...formData, name: e.target.value})} />
+                                <input className="border-b-2 border-slate-100 p-3 outline-none focus:border-blue-600 transition" placeholder="Phone Number *" required onChange={e => setFormData({...formData, phone: e.target.value})} />
+                                <input className="border-b-2 border-slate-100 p-3 outline-none focus:border-blue-600 transition" placeholder="Pickup Address *" required onChange={e => setFormData({...formData, pickup: e.target.value})} />
+                                <input className="border-b-2 border-slate-100 p-3 outline-none focus:border-blue-600 transition" placeholder="Destination City *" required onChange={e => setFormData({...formData, delivery: e.target.value})} />
+                                <select className="border-b-2 border-slate-100 p-3 outline-none focus:border-blue-600 transition md:col-span-2" required onChange={e => setFormData({...formData, type: e.target.value})}>
+                                    <option value="">Courier Type *</option>
+                                    <option>Local</option>
+                                    <option>Domestic</option>
+                                    <option>International</option>
+                                </select>
+                                <textarea className="border-b-2 border-slate-100 p-3 outline-none focus:border-blue-600 transition md:col-span-2 h-20" placeholder="Optional Message" onChange={e => setFormData({...formData, note: e.target.value})}></textarea>
+                                <button className="md:col-span-2 bg-red-600 text-white py-5 rounded-2xl font-black text-lg tracking-widest hover:bg-red-700 transition">
+                                    BOOK VIA WHATSAPP
+                                </button>
+                            </form>
                         </div>
                     </section>
 
-                    {/* Footer */}
-                    <footer id="contact" className="py-20 bg-white border-t border-slate-100 text-center">
-                        <div className="max-w-7xl mx-auto px-6">
-                            <div className="text-3xl font-black mb-6">SKY EXPRESS</div>
-                            <p className="text-slate-500 mb-10 max-w-md mx-auto">Plot No: 5, Old Dairy Farm, Visakhapatnam – 530040. Serving Vizag with Pride.</p>
-                            <div className="flex justify-center gap-8 mb-12 font-bold text-slate-400">
-                                <a href="mailto:skyexpress.vskp@gmail.com" className="hover:text-blue-600 transition">Email</a>
-                                <a href="tel:+918121592299" className="hover:text-blue-600 transition">Phone</a>
-                                <a href="#" className="hover:text-blue-600 transition">Location</a>
+                    {/* Contact & Map */}
+                    <footer id="contact" className="pt-32 pb-12 bg-white px-6">
+                        <div className="max-w-7xl mx-auto grid md:grid-cols-3 gap-16 mb-20">
+                            <div>
+                                <h4 className="text-xl font-black mb-6 uppercase text-blue-700">Sky Express HQ</h4>
+                                <p className="text-slate-500 leading-relaxed font-semibold">
+                                    Plot No: 5, Old Dairy Farm, <br/>
+                                    Visakhapatnam – 530040, India
+                                </p>
                             </div>
-                            <div className="text-[10px] tracking-[0.3em] uppercase text-slate-400 font-bold">
-                                © 2026 Sky Express International Couriers. All Rights Reserved.
+                            <div>
+                                <h4 className="text-xl font-black mb-6 uppercase text-blue-700">Quick Connect</h4>
+                                <p className="text-slate-900 font-bold text-lg mb-2 underline tracking-tight">+91 81215 92299</p>
+                                <p className="text-slate-500 font-semibold">skyexpress.vskp@gmail.com</p>
                             </div>
+                            <div>
+                                <h4 className="text-xl font-black mb-6 uppercase text-blue-700">Operating Hours</h4>
+                                <p className="text-slate-500 font-semibold uppercase tracking-widest text-xs">Mon - Sat: 09:00 AM - 08:00 PM</p>
+                                <p className="text-red-500 font-bold uppercase tracking-widest text-xs mt-2 italic">Sunday: Closed</p>
+                            </div>
+                        </div>
+
+                        {/* Location Map */}
+                        <div className="max-w-7xl mx-auto h-[400px] rounded-[3rem] overflow-hidden shadow-2xl mb-20 border-8 border-slate-100">
+                             <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3800.0658826555194!2d83.3156686!3d17.7415448!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a39436155555555%3A0x7d6c6e76e568d44e!2sSky%20Express%20International%20Couriers!5e0!3m2!1sen!2sin!4v1715600000000!5m2!1sen!2sin" width="100%" height="100%" loading="lazy"></iframe>
+                        </div>
+
+                        <div className="text-center text-[10px] tracking-[0.4em] font-black text-slate-300 uppercase">
+                            © 2026 Sky Express International Couriers | Visakhapatnam
                         </div>
                     </footer>
                 </div>
