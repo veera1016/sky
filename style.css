@@ -212,3 +212,69 @@ h1{
   .mobile-menu-btn{display:flex}
 }
 
+/* ===== RESTORE DESKTOP HERO LAYOUT ===== */
+@media (min-width:769px){
+
+  .hero-inner{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:40px;
+  }
+
+  .hero-left{
+    flex:1 1 520px;
+  }
+
+  .hero-right{
+    flex:0 1 420px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+  }
+
+  .image-stack{
+    max-width:420px;
+    width:100%;
+  }
+
+  .floating-stat{
+    left:50%;
+    transform:translateX(-50%);
+    bottom:-18px;
+    padding:10px 16px;
+  }
+}
+
+/* ===== SIMPLE MOBILE FIX ONLY ===== */
+@media (max-width:768px){
+
+  .hero-section{
+    padding-top:95px;
+  }
+
+  .hero-inner{
+    flex-direction:column;
+    text-align:center;
+  }
+
+  .hero-right{
+    margin-top:12px;
+  }
+
+  .image-stack{
+    max-width:320px;
+    margin:0 auto;
+  }
+
+  .floating-stat{
+    left:50%;
+    transform:translateX(-50%);
+    bottom:-12px;
+    padding:8px 12px;
+    font-size:12px;
+    min-width:auto;
+  }
+}
+
+
