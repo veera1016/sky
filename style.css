@@ -981,68 +981,70 @@ a:focus,button:focus,input:focus,select:focus,textarea:focus{
 
 }
 
-/* =========================================
-   FIX HEADER HEIGHT (REMOVE TOP EMPTY SPACE)
-========================================= */
+/* =====================================================
+   FINAL MOBILE FIX — SMALL STAT CARD + PERFECT POSITION
+   (Laptop will NOT change)
+===================================================== */
 
 @media (max-width:768px){
 
-  header#site-header{
-    padding:6px 0 !important;
+  /* ---------- HEADER HEIGHT FIX ---------- */
+  #site-header{
+    padding:4px 0 !important;
   }
 
   .nav-inner{
-    min-height:58px !important;
+    min-height:54px !important;
   }
 
   .nav-logo{
-    height:38px !important;
+    height:34px !important;
   }
 
   .brand-text .m-title{
-    font-size:18px !important;
+    font-size:17px !important;
   }
 
   .brand-text .s-title{
-    font-size:11px !important;
+    font-size:10px !important;
   }
 
-}
 
-
-/* =========================================
-   FIX HERO HEIGHT + STAT POSITION
-========================================= */
-
-@media (max-width:768px){
-
+  /* ---------- HERO HEIGHT FIX ---------- */
   .hero-section{
-    padding:15px 0 0 !important;
+    padding:10px 0 0 !important;
     min-height:auto !important;
   }
 
-  .hero-left{
-    margin-bottom:6px !important;
-  }
 
-  .hero-right{
-    margin-top:-10px !important;
-  }
-
-  /* IMAGE SIZE */
+  /* ---------- HERO IMAGE SIZE ---------- */
   .image-stack{
-    width:220px !important;
+    width:200px !important;
     margin:0 auto !important;
   }
 
-  /* FLOATING STAT — MOVE UP */
+
+  /* ---------- SMALL + CENTER STAT CARD ---------- */
   .floating-stat{
-    bottom:18px !important;   /* <-- THIS MOVES CARD UP */
-    padding:8px 14px !important;
-    font-size:0.9rem !important;
+    bottom:10px !important;        /* move DOWN (not touching header) */
+    left:50% !important;
+    transform:translateX(-50%) !important;
+    padding:6px 12px !important;
+    border-radius:10px !important;
+    font-size:0.75rem !important;
+    min-width:auto !important;
+  }
+
+  .floating-stat .stat-num{
+    font-size:1rem !important;
+  }
+
+  .floating-stat .stat-txt{
+    font-size:0.75rem !important;
   }
 
 }
+
 
 
 
