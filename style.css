@@ -761,6 +761,95 @@ a:focus,button:focus,input:focus,select:focus,textarea:focus{
     text-align:center;
   }
 }
+/* =========================================
+   HERO RIGHT IMAGE PERFECT ALIGNMENT
+========================================= */
+
+/* Center and control hero right block */
+.hero-right{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  position:relative;
+}
+
+/* Image container */
+.image-stack{
+  max-width:380px;        /* control size on laptop */
+  width:100%;
+  margin:0 auto;
+  position:relative;
+}
+
+/* Main hero image */
+.main-hero-img{
+  width:100%;
+  border-radius:18px;
+  box-shadow:0 20px 40px rgba(0,0,0,0.15);
+}
+
+/* Floating stat box (99%) */
+.floating-stat{
+  position:absolute;
+  bottom:-12px;
+  left:50%;
+  transform:translateX(-50%);
+  background:#fff;
+  padding:10px 16px;
+  border-radius:12px;
+  box-shadow:0 8px 24px rgba(0,0,0,0.12);
+  text-align:center;
+  min-width:140px;
+}
+
+/* Laptop adjustment */
+@media (max-width:1200px){
+  .image-stack{
+    max-width:340px;
+  }
+}
+
+/* Tablet */
+@media (max-width:992px){
+  .hero-right{
+    margin-top:20px;
+  }
+  .image-stack{
+    max-width:300px;
+  }
+}
+
+/* Mobile */
+@media (max-width:768px){
+  .hero-inner{
+    flex-direction:column;
+    align-items:center;
+    text-align:center;
+  }
+
+  .hero-right{
+    order:2;
+    margin-top:25px;
+  }
+
+  .image-stack{
+    max-width:260px;
+  }
+
+  .floating-stat{
+    bottom:-10px;
+    font-size:0.9rem;
+  }
+}
+
+/* Small phones */
+@media (max-width:480px){
+  .image-stack{
+    max-width:220px;
+  }
+}
+
+
 
 
 
