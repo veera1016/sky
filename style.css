@@ -913,90 +913,108 @@ a:focus,button:focus,input:focus,select:focus,textarea:focus{
   }
 }
 /* =====================================================
-   FINAL MOBILE FIX – HERO ORDER + SPACING + FLOAT ICON
+   STRONG MOBILE FIX – FORCE CORRECT LAYOUT
+   Fix: Hero order + blank space + floating icons + spacing
 ===================================================== */
 
-@media (max-width:768px){
+@media screen and (max-width:768px){
 
-  /* ---------- FIX HERO ORDER ---------- */
+  /* ---------- FORCE HERO TEXT FIRST ---------- */
   .hero-inner{
-    flex-direction:column;
-    align-items:center;
-    text-align:center;
-    gap:18px;
+    display:flex !important;
+    flex-direction:column !important;
+    align-items:center !important;
+    justify-content:center !important;
+    text-align:center !important;
+    gap:16px !important;
   }
 
   .hero-left{
-    order:1;      /* TEXT FIRST */
+    order:1 !important;
+    width:100% !important;
   }
 
   .hero-right{
-    order:2;      /* IMAGE BELOW TEXT */
-    margin-top:10px;
+    order:2 !important;
+    width:100% !important;
+    margin-top:10px !important;
+    display:flex !important;
+    justify-content:center !important;
   }
 
-  /* Reduce hero empty space */
+  /* ---------- REMOVE EXTRA BLANK SPACE ---------- */
   .hero-section{
-    padding:70px 0 40px;
+    padding-top:65px !important;
+    padding-bottom:35px !important;
+    min-height:auto !important;
   }
 
-  /* Reduce gap below hero image */
   .image-stack{
-    max-width:260px;
-    margin:0 auto;
+    max-width:250px !important;
+    margin:0 auto !important;
   }
 
-  /* Floating stat box */
   .floating-stat{
-    bottom:-12px;
+    bottom:-10px !important;
   }
 
-  /* Reduce big blank space */
+  /* Remove large gap after hero */
   .services-area{
-    padding-top:40px;
+    padding-top:30px !important;
   }
 
-
-  /* ---------- FIX FLOATING CONTACT ICONS ---------- */
-
+  /* ---------- STOP FLOAT ICON JUMPING ---------- */
   .floating-contacts{
-    position:fixed;
-    right:14px;
-    bottom:20px;
-    gap:10px;
-    transform:none;        /* STOP JUMPING */
+    position:fixed !important;
+    right:14px !important;
+    bottom:20px !important;
+    gap:10px !important;
+    transform:none !important;
   }
 
   .contact-btn{
-    width:46px;
-    height:46px;
-    font-size:18px;
-    box-shadow:0 6px 16px rgba(0,0,0,0.18);
+    width:46px !important;
+    height:46px !important;
+    font-size:18px !important;
   }
 
-  /* Prevent scroll shaking */
+  /* ---------- GENERAL MOBILE TIGHT LAYOUT ---------- */
   body{
-    overflow-x:hidden;
+    overflow-x:hidden !important;
+  }
+
+  .hero-ctas{
+    flex-direction:column !important;
+    gap:10px !important;
+  }
+
+  .btn-main,
+  .btn-outline{
+    width:100% !important;
+    justify-content:center !important;
   }
 }
 
 
 /* Extra small phones */
-@media (max-width:420px){
+@media screen and (max-width:420px){
 
   .image-stack{
-    max-width:230px;
+    max-width:220px !important;
   }
 
   .hero-section{
-    padding:60px 0 30px;
+    padding-top:55px !important;
+    padding-bottom:25px !important;
   }
 
   .floating-contacts{
-    right:12px;
-    bottom:18px;
+    right:12px !important;
+    bottom:16px !important;
   }
 }
+
+
 
 
 
