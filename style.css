@@ -981,7 +981,34 @@ a:focus,button:focus,input:focus,select:focus,textarea:focus{
 
 }
 
+/* ===== FINAL FIX — SHOW FULL PAGE BELOW HERO ===== */
+
+.hero-section{
+  height:auto !important;
+  min-height:auto !important;
+  overflow:visible !important;
 }
+
+/* Ensure next section visible */
+.services-area{
+  margin-top:0 !important;
+  position:relative;
+  z-index:1;
+}
+
+/* Prevent any section cutting content */
+section, .services-area, .why-us-area, .pickup-area, .map-area, #site-footer{
+  overflow:visible !important;
+}
+
+/* Remove fixed heights if any */
+.hero-inner{
+  height:auto !important;
+}
+
+
+}
+
 
 
 
