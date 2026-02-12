@@ -982,57 +982,60 @@ a:focus,button:focus,input:focus,select:focus,textarea:focus{
 }
 
 /* =====================================================
-   FINAL MOBILE FIX — SMALL STAT CARD + PERFECT POSITION
-   (Laptop will NOT change)
+   PERFECT MOBILE HERO FIX (No overlap, clean spacing)
 ===================================================== */
 
 @media (max-width:768px){
 
-  /* ---------- HEADER HEIGHT FIX ---------- */
+  /* ---------- HEADER COMPACT ---------- */
   #site-header{
     padding:4px 0 !important;
   }
 
   .nav-inner{
-    min-height:54px !important;
+    min-height:52px !important;
   }
 
   .nav-logo{
     height:34px !important;
   }
 
-  .brand-text .m-title{
-    font-size:17px !important;
+  /* ---------- HERO LAYOUT STACK ---------- */
+  .hero-inner{
+    flex-direction:column !important;
+    text-align:center !important;
+    gap:18px !important;
   }
 
-  .brand-text .s-title{
-    font-size:10px !important;
+  .hero-left{
+    order:1 !important;
   }
 
-
-  /* ---------- HERO HEIGHT FIX ---------- */
-  .hero-section{
-    padding:10px 0 0 !important;
-    min-height:auto !important;
+  .hero-right{
+    order:2 !important;
+    width:100% !important;
+    display:flex !important;
+    justify-content:center !important;
   }
 
-
-  /* ---------- HERO IMAGE SIZE ---------- */
+  /* ---------- HERO IMAGE SMALL + CENTER ---------- */
   .image-stack{
-    width:200px !important;
-    margin:0 auto !important;
+    width:210px !important;
+    margin:10px auto 0 !important;
+    position:relative !important;
   }
 
-
-  /* ---------- SMALL + CENTER STAT CARD ---------- */
+  /* ---------- FIX STAT CARD POSITION ---------- */
   .floating-stat{
-    bottom:10px !important;        /* move DOWN (not touching header) */
+    position:absolute !important;
+    bottom:-12px !important;   /* sits nicely on image */
     left:50% !important;
     transform:translateX(-50%) !important;
     padding:6px 12px !important;
     border-radius:10px !important;
     font-size:0.75rem !important;
     min-width:auto !important;
+    box-shadow:0 6px 14px rgba(0,0,0,0.12) !important;
   }
 
   .floating-stat .stat-num{
@@ -1043,12 +1046,14 @@ a:focus,button:focus,input:focus,select:focus,textarea:focus{
     font-size:0.75rem !important;
   }
 
+  /* ---------- REMOVE EXTRA HERO HEIGHT ---------- */
+  .hero-section{
+    padding-top:10px !important;
+    padding-bottom:20px !important;
+    min-height:auto !important;
+  }
+
 }
-
-
-
-
-
 
 
 
