@@ -913,51 +913,57 @@ a:focus,button:focus,input:focus,select:focus,textarea:focus{
   }
 }
 
-/* =========================================
-   FINAL MOBILE HERO GAP FIX (NO BIG SPACE)
-========================================= */
+/* =====================================================
+   ABSOLUTE FINAL MOBILE HERO FIX (NO GAP / PERFECT)
+===================================================== */
 
 @media (max-width:768px){
 
-  /* Reduce hero height */
+  /* HERO container */
   .hero-section{
-    padding:50px 0 10px !important;
+    padding:40px 0 0 !important;
     min-height:auto !important;
   }
 
-  /* Remove gap between text & image */
+  /* FORCE single column layout */
   .hero-inner{
-    display:flex !important;
-    flex-direction:column !important;
-    align-items:center !important;
-    gap:4px !important;
+    display:block !important;
   }
 
-  /* Reduce bottom space under text */
+  /* TEXT block */
   .hero-left{
-    margin-bottom:0 !important;
-    padding-bottom:0 !important;
+    text-align:center !important;
+    margin-bottom:10px !important;
   }
 
-  /* Pull image UP */
+  /* IMAGE block — pull up */
   .hero-right{
-    margin-top:-20px !important;
+    margin-top:-10px !important;
+    text-align:center !important;
   }
 
-  /* Control image size */
+  /* IMAGE size */
   .image-stack{
-    max-width:240px !important;
+    width:220px !important;
+    max-width:85% !important;
     margin:0 auto !important;
   }
 
-  /* Floating stat adjust */
+  .main-hero-img{
+    width:100% !important;
+    height:auto !important;
+  }
+
+  /* FLOATING STAT */
   .floating-stat{
-    bottom:-5px !important;
+    bottom:-6px !important;
+    left:50% !important;
+    transform:translateX(-50%) !important;
     padding:8px 14px !important;
     font-size:0.9rem !important;
   }
 
-  /* Remove extra space before next section */
+  /* REMOVE GAP BEFORE NEXT SECTION */
   .services-area{
     margin-top:0 !important;
     padding-top:20px !important;
@@ -966,18 +972,16 @@ a:focus,button:focus,input:focus,select:focus,textarea:focus{
 }
 
 
-/* EXTRA SMALL PHONE */
+/* SMALL PHONES */
 @media (max-width:420px){
 
-  .hero-right{
-    margin-top:-25px !important;
-  }
-
   .image-stack{
-    max-width:220px !important;
+    width:200px !important;
   }
 
 }
+
+
 
 
 
