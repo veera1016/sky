@@ -2,20 +2,26 @@
 <html>
 <head>
 <title>Shipment Dashboard</title>
+
 <style>
-body{font-family:Arial;background:#f5f5f5;}
+body{font-family:Arial;background:#f4f4f4;}
+
 .container{
-    width:80%;
+    width:85%;
     margin:auto;
     background:white;
     padding:20px;
     border-radius:8px;
 }
+
+h2{margin-top:0;}
+
 input,textarea{
     width:100%;
     padding:8px;
-    margin:5px 0;
+    margin:6px 0;
 }
+
 button{
     background:#007bff;
     color:white;
@@ -23,50 +29,88 @@ button{
     padding:10px 15px;
     cursor:pointer;
 }
+
 table{
     width:100%;
     border-collapse:collapse;
-    margin-top:20px;
+    margin-top:15px;
 }
-table,th,td{
-    border:1px solid #ccc;
+
+td,th{
+    border:1px solid #2ecc71;
+    padding:10px;
 }
+
 th{
-    background:#4CAF50;
+    background:#2ecc71;
     color:white;
 }
-td,th{
-    padding:8px;
+
+.label{
+    width:30%;
+    font-weight:bold;
+}
+
+.section{
+    margin-top:25px;
+    padding-top:10px;
+    border-top:2px solid #eee;
 }
 </style>
+
 </head>
 
 <body>
 
 <div class="container">
 
-<h2>Manage Tracking IDs</h2>
+<h2>Manage Shipment</h2>
 
-<label>Tracking ID</label>
-<input type="text" id="tracking">
+<!-- AWB ENTRY -->
+<h3>Add / Update AWB Details</h3>
 
-<label>Status Message</label>
-<textarea id="status"></textarea>
+<input type="text" id="awb" placeholder="AWB No">
+<input type="text" id="date" placeholder="Booking Date">
+<input type="text" id="consignee" placeholder="Consignee Name">
+<input type="text" id="destination" placeholder="Destination">
+<input type="text" id="status" placeholder="Status">
+<input type="text" id="deliveryDate" placeholder="Delivery Date & Time">
+<input type="text" id="receiver" placeholder="Receiver Name">
+<input type="text" id="deliveryAwb" placeholder="Delivery AWB No">
 
-<button onclick="addShipment()">Save & Update Shipment</button>
+<button onclick="updateAWB()">Save / Update AWB</button>
+
+<!-- AWB OUTPUT -->
+<div class="section">
 
 <h3>AWB Details</h3>
 
 <table>
-<tr><td>AWB No.</td><td id="awb"></td></tr>
-<tr><td>Booking Date</td><td>10/02/2026</td></tr>
-<tr><td>Destination</td><td>Australia</td></tr>
-<tr><td>Status</td><td id="mainStatus"></td></tr>
+<tr><td class="label">AWB No.</td><td id="o_awb"></td></tr>
+<tr><td class="label">Booking Date</td><td id="o_date"></td></tr>
+<tr><td class="label">Consignee Name</td><td id="o_consignee"></td></tr>
+<tr><td class="label">Destination</td><td id="o_destination"></td></tr>
+<tr><td class="label">Status</td><td id="o_status"></td></tr>
+<tr><td class="label">Delivery Date and Time</td><td id="o_deliveryDate"></td></tr>
+<tr><td class="label">Receiver Name</td><td id="o_receiver"></td></tr>
+<tr><td class="label">Delivery AWB No.</td><td id="o_deliveryAwb"></td></tr>
 </table>
+
+</div>
+
+<!-- SHIPMENT PROGRESS -->
+<div class="section">
 
 <h3>Shipment Progress</h3>
 
-<table id="progress">
+<input type="date" id="p_date">
+<input type="time" id="p_time">
+<input type="text" id="p_location" placeholder="Location">
+<input type="text" id="p_activity" placeholder="Activity">
+
+<button onclick="addProgress()">Add Progress</button>
+
+<table id="progressTable">
 <tr>
 <th>Date</th>
 <th>Time</th>
@@ -77,30 +121,51 @@ td,th{
 
 </div>
 
+</div>
+
 <script>
 
-function addShipment(){
+function updateAWB(){
 
-    var id = document.getElementById("tracking").value;
-    var status = document.getElementById("status").value;
+document.getElementById("o_awb").innerHTML =
+document.getElementById("awb").value;
 
-    document.getElementById("awb").innerHTML = id;
-    document.getElementById("mainStatus").innerHTML = status;
+document.getElementById("o_date").innerHTML =
+document.getElementById("date").value;
 
-    var table = document.getElementById("progress");
+document.getElementById("o_consignee").innerHTML =
+document.getElementById("consignee").value;
 
-    var row = table.insertRow(1);
+document.getElementById("o_destination").innerHTML =
+document.getElementById("destination").value;
 
-    var today = new Date();
-    var date = today.toLocaleDateString();
-    var time = today.getHours() + ":" + today.getMinutes();
+document.getElementById("o_status").innerHTML =
+document.getElementById("status").value;
 
-    row.insertCell(0).innerHTML = date;
-    row.insertCell(1).innerHTML = time;
-    row.insertCell(2).innerHTML = "Hyderabad";
-    row.insertCell(3).innerHTML = status;
+document.getElementById("o_deliveryDate").innerHTML =
+document.getElementById("deliveryDate").value;
+
+document.getElementById("o_receiver").innerHTML =
+document.getElementById("receiver").value;
+
+document.getElementById("o_deliveryAwb").innerHTML =
+document.getElementById("deliveryAwb").value;
 
 }
+
+function addProgress(){
+
+var table = document.getElementById("progressTable");
+
+var row = table.insertRow(1);
+
+row.insertCell(0).innerHTML = document.getElementById("p_date").value;
+row.insertCell(1).innerHTML = document.getElementById("p_time").value;
+row.insertCell(2).innerHTML = document.getElementById("p_location").value;
+row.insertCell(3).innerHTML = document.getElementById("p_activity").value;
+
+}
+
 </script>
 
 </body>
