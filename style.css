@@ -1,6 +1,7 @@
-/* SKY EXPRESS — FINAL PROFESSIONAL CSS (CLEAN & ALIGNED)
-Fully balanced layout, no conflicts, perfect spacing
-*/
+/* =====================================================
+SKY EXPRESS — SAFE FINAL CSS (NON-BREAKING)
+Keeps your original design + fixes alignment
+===================================================== */
 
 /* ================= ROOT ================= */
 :root{
@@ -11,7 +12,7 @@ Fully balanced layout, no conflicts, perfect spacing
 --card:#ffffff;
 --muted:#576574;
 --navy:#07101d;
---radius-lg:24px;
+--radius-lg:22px;
 --radius-md:12px;
 --max-width:1200px;
 }
@@ -25,14 +26,14 @@ background:var(--bg);
 color:#1f2933;
 overflow-x:hidden;
 }
-img{max-width:100%}
+img{max-width:100%;height:auto}
 a{text-decoration:none;color:inherit}
 
 /* ================= CONTAINER ================= */
 .centered-container{
 max-width:var(--max-width);
 margin:0 auto;
-padding:0 18px;
+padding:0 20px;
 }
 
 /* ================= NAVBAR ================= */
@@ -41,9 +42,13 @@ position:fixed;
 top:0;
 width:100%;
 z-index:1000;
+transition:0.3s;
+}
+#navbar.scrolled{
 background:#fff;
 box-shadow:0 2px 10px rgba(0,0,0,0.05);
 }
+
 .nav-inner{
 display:flex;
 align-items:center;
@@ -51,17 +56,26 @@ justify-content:space-between;
 gap:18px;
 padding:14px 0;
 }
+
+.nav-logo{height:48px}
+
 .nav-links{
 display:flex;
 gap:22px;
 align-items:center;
+list-style:none;
+margin:0;
+padding:0;
 }
+
 .nav-actions{
 display:flex;
 gap:12px;
 align-items:center;
 }
+
 .phone-link{font-weight:700}
+
 .cta-nav{
 background:var(--accent);
 color:#fff;
@@ -71,17 +85,31 @@ border-radius:999px;
 
 /* ================= HERO ================= */
 .hero-section{
-padding:130px 0 80px;
-background:#f3f7ff;
+padding:140px 0 80px;
 }
+
 .hero-inner{
 display:flex;
 align-items:center;
 justify-content:space-between;
 gap:40px;
+flex-wrap:wrap;
 }
-.hero-left{max-width:560px}
-.hero-ctas{display:flex;gap:14px;flex-wrap:wrap}
+
+.hero-left{flex:1;min-width:320px}
+.hero-right{flex:1;display:flex;justify-content:center}
+
+h1{
+font-size:3rem;
+margin-bottom:12px;
+}
+
+.hero-ctas{
+display:flex;
+gap:14px;
+flex-wrap:wrap;
+}
+
 .btn-main{
 background:var(--primary);
 color:#fff;
@@ -89,6 +117,7 @@ padding:13px 22px;
 border-radius:12px;
 font-weight:700;
 }
+
 .btn-outline{
 border:2px solid #ddd;
 padding:11px 18px;
@@ -96,12 +125,17 @@ border-radius:12px;
 }
 
 /* ================= SERVICES ================= */
-.section-header{text-align:center;margin-bottom:40px}
+.section-header{
+text-align:center;
+margin-bottom:40px;
+}
+
 .services-grid{
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
 gap:26px;
 }
+
 .s-card{
 background:#fff;
 padding:26px;
@@ -110,12 +144,13 @@ box-shadow:0 6px 20px rgba(0,0,0,0.05);
 height:100%;
 }
 
-/* ================= WHY ================= */
+/* ================= WHY US ================= */
 .why-us-grid{
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
 gap:20px;
 }
+
 .why-card{
 display:flex;
 gap:14px;
@@ -131,6 +166,7 @@ display:grid;
 grid-template-columns:1fr 1fr;
 gap:40px;
 }
+
 .pickup-form-container{
 background:#fff;
 padding:22px;
@@ -150,22 +186,32 @@ box-shadow:0 6px 20px rgba(0,0,0,0.05);
 background:#07101d;
 color:#9aa6b2;
 padding:50px 0 25px;
+margin-top:40px;
 }
+
 .footer-grid{
 display:grid;
 grid-template-columns:1.3fr 1fr 1fr;
 gap:40px;
 }
+
 .footer-brand img{height:40px;margin-bottom:10px}
-.footer-links ul{list-style:none;padding:0}
+
+.footer-links ul{
+list-style:none;
+padding:0;
+margin:0;
+}
+
 .footer-links a:hover
+
 .footer-bottom{
 margin-top:20px;
 border-top:1px solid rgba(255,255,255,0.08);
 padding-top:10px;
 }
 
-/* ================= FLOATING BUTTONS ================= */
+/* ================= FLOATING CONTACTS ================= */
 .floating-contacts{
 position:fixed;
 right:20px;
@@ -173,7 +219,9 @@ bottom:20px;
 display:flex;
 flex-direction:column;
 gap:12px;
+z-index:999;
 }
+
 .contact-btn{
 width:48px;
 height:48px;
@@ -184,6 +232,7 @@ justify-content:center;
 color:#fff;
 font-size:18px;
 }
+
 .phone-btn{background:#0061ff}
 .mail-btn{background:#ff9800}
 .whatsapp-btn{background:#25d366}
@@ -194,7 +243,12 @@ font-size:18px;
 .pickup-wrapper{grid-template-columns:1fr}
 .footer-grid{grid-template-columns:1fr 1fr}
 }
+
 @media (max-width:768px){
 .nav-links,.nav-actions{display:none}
 .footer-grid{grid-template-columns:1fr;text-align:center}
+}
+
+@media (max-width:480px){
+h1{font-size:2rem}
 }
