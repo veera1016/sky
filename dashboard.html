@@ -95,7 +95,7 @@ function updateAWB(){
  db[id].bookingDate = date.value;
  db[id].consignee = consignee.value;
  db[id].destination = destination.value;
- db[id].status = status.value.trim() || db[id].status;
+ db[id].status = document.getElementById("status").value.trim() || db[id].status;
  db[id].deliveryDate = deliveryDate.value;
  db[id].receiver = receiver.value;
  db[id].deliveryAwb = deliveryAwb.value;
