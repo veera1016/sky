@@ -1,70 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Shipment Dashboard</title>
+
+<style>
+body{font-family:Arial;background:#f4f4f4;}
+
+.container{
+    width:85%;
+    margin:auto;
+    background:white;
+    padding:20px;
+    border-radius:8px;
+}
+
+h2{margin-top:0;}
+
+input,textarea{
+    width:100%;
+    padding:8px;
+    margin:6px 0;
+}
+
+button{
+    background:#007bff;
+    color:white;
+    border:none;
+    padding:10px 15px;
+    cursor:pointer;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:15px;
+}
+
+td,th{
+    border:1px solid #2ecc71;
+    padding:10px;
+}
+
+th{
+    background:#2ecc71;
+    color:white;
+}
+
+.label{
+    width:30%;
+    font-weight:bold;
+}
+
+.section{
+    margin-top:25px;
+    padding-top:10px;
+    border-top:2px solid #eee;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>Manage Shipment</h2>
+
+<!-- AWB ENTRY -->
+<h3>Add / Update AWB Details</h3>
+
+<input type="text" id="awb" placeholder="AWB No">
+<input type="text" id="date" placeholder="Booking Date">
+<input type="text" id="consignee" placeholder="Consignee Name">
+<input type="text" id="destination" placeholder="Destination">
+<input type="text" id="status" placeholder="Status">
+<input type="text" id="deliveryDate" placeholder="Delivery Date & Time">
+<input type="text" id="receiver" placeholder="Receiver Name">
+<input type="text" id="deliveryAwb" placeholder="Delivery AWB No">
+
+<button onclick="updateAWB()">Save / Update AWB</button>
+
+<!-- AWB OUTPUT -->
+<div class="section">
+
+<h3>AWB Details</h3>
+
+<table>
+<tr><td class="label">AWB No.</td><td id="o_awb"></td></tr>
+<tr><td class="label">Booking Date</td><td id="o_date"></td></tr>
+<tr><td class="label">Consignee Name</td><td id="o_consignee"></td></tr>
+<tr><td class="label">Destination</td><td id="o_destination"></td></tr>
+<tr><td class="label">Status</td><td id="o_status"></td></tr>
+<tr><td class="label">Delivery Date and Time</td><td id="o_deliveryDate"></td></tr>
+<tr><td class="label">Receiver Name</td><td id="o_receiver"></td></tr>
+<tr><td class="label">Delivery AWB No.</td><td id="o_deliveryAwb"></td></tr>
+</table>
+
+</div>
+
+<!-- SHIPMENT PROGRESS -->
+<div class="section">
+
+<h3>Shipment Progress</h3>
+
+<input type="date" id="p_date">
+<input type="time" id="p_time">
+<input type="text" id="p_location" placeholder="Location">
+<input type="text" id="p_activity" placeholder="Activity">
+
+<button onclick="addProgress()">Add Progress</button>
+
+<table id="progressTable">
+<tr>
+<th>Date</th>
+<th>Time</th>
+<th>Location</th>
+<th>Activity</th>
+</tr>
+</table>
+
+</div>
+
+</div>
+
 <script>
 
-// protect page
-if(sessionStorage.getItem("login") !== "true"){
-  window.location.href = "login.html";
+function updateAWB(){
+
+document.getElementById("o_awb").innerHTML =
+document.getElementById("awb").value;
+
+document.getElementById("o_date").innerHTML =
+document.getElementById("date").value;
+
+document.getElementById("o_consignee").innerHTML =
+document.getElementById("consignee").value;
+
+document.getElementById("o_destination").innerHTML =
+document.getElementById("destination").value;
+
+document.getElementById("o_status").innerHTML =
+document.getElementById("status").value;
+
+document.getElementById("o_deliveryDate").innerHTML =
+document.getElementById("deliveryDate").value;
+
+document.getElementById("o_receiver").innerHTML =
+document.getElementById("receiver").value;
+
+document.getElementById("o_deliveryAwb").innerHTML =
+document.getElementById("deliveryAwb").value;
+
 }
 
-// ===== SAFE SAVE FUNCTION =====
+function addProgress(){
 
-const token = "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";
-const repo = "veera1016/sky";
-const file = "data.json";
+var table = document.getElementById("progressTable");
 
-async function updateAWB(){
+var row = table.insertRow(1);
 
-try{
-
-const shipment = {
-  awb: document.getElementById("awb").value,
-  date: document.getElementById("date").value,
-  consignee: document.getElementById("consignee").value,
-  destination: document.getElementById("destination").value,
-  status: document.getElementById("status").value,
-  deliveryDate: document.getElementById("deliveryDate").value,
-  receiver: document.getElementById("receiver").value,
-  deliveryAwb: document.getElementById("deliveryAwb").value,
-  progress: []
-};
-
-let res = await fetch(`https://api.github.com/repos/${repo}/contents/${file}`);
-
-if(!res.ok){
-   alert("Cannot access GitHub file. Check token or repo.");
-   return;
-}
-
-let data = await res.json();
-let content = JSON.parse(atob(data.content));
-
-let index = content.shipments.findIndex(s => s.awb == shipment.awb);
-
-if(index >= 0){
-   content.shipments[index] = shipment;
-}else{
-   content.shipments.push(shipment);
-}
-
-await fetch(`https://api.github.com/repos/${repo}/contents/${file}`, {
-  method:"PUT",
-  headers:{
-    "Authorization":"token "+token,
-    "Content-Type":"application/json"
-  },
-  body:JSON.stringify({
-    message:"Save shipment "+shipment.awb,
-    content:btoa(JSON.stringify(content, null, 2)),
-    sha:data.sha
-  })
-});
-
-alert("Saved Successfully!");
-
-}catch(e){
-  console.error(e);
-  alert("Error saving shipment. Check console.");
-}
+row.insertCell(0).innerHTML = document.getElementById("p_date").value;
+row.insertCell(1).innerHTML = document.getElementById("p_time").value;
+row.insertCell(2).innerHTML = document.getElementById("p_location").value;
+row.insertCell(3).innerHTML = document.getElementById("p_activity").value;
 
 }
 
 </script>
+
+</body>
+</html>
