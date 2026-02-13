@@ -2,26 +2,30 @@
 <html>
 <head>
 <title>Admin Login</title>
+<style>
+body{font-family:Arial;background:#f4f4f4;text-align:center;padding-top:120px;}
+.box{background:#fff;padding:30px;width:320px;margin:auto;border-radius:8px;box-shadow:0 0 10px #ccc;}
+input{width:90%;padding:10px;margin:8px;}
+button{background:#28a745;color:#fff;border:none;padding:10px 15px;cursor:pointer;}
+</style>
 </head>
 <body>
 
+<div class="box">
 <h2>Admin Login</h2>
-
-<input id="u" placeholder="Username"><br><br>
-<input id="p" type="password" placeholder="Password"><br><br>
-
+<input id="u" placeholder="Username"><br>
+<input id="p" type="password" placeholder="Password"><br>
 <button onclick="go()">Login</button>
-
 <p id="m" style="color:red;"></p>
+</div>
 
 <script>
 function go(){
-  if(document.getElementById("u").value==="admin" &&
-     document.getElementById("p").value==="admin123"){
-       window.location="dashboard.html";
-  }else{
-       document.getElementById("m").innerText="Wrong login";
-  }
+ if(u.value==="admin" && p.value==="admin123"){
+   window.location="dashboard.html";
+ }else{
+   m.innerText="Wrong login";
+ }
 }
 </script>
 
