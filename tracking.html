@@ -1,36 +1,72 @@
-<script>
+<!DOCTYPE html>
+<html>
+<head>
+<title>Track Shipment</title>
+</head>
+<body>
 
-document.querySelector(".btn-main")?.addEventListener("click", track);
+<h2>Track Shipment</h2>
+
+<input id="trackId" placeholder="Enter AWB">
+<button onclick="track()">TRACK</button>
+
+<hr>
+
+<h3>AWB Details</h3>
+
+<p><b>AWB:</b> <span id="awb"></span></p>
+<p><b>Booking Date:</b> <span id="booking"></span></p>
+<p><b>Consignee:</b> <span id="consignee"></span></p>
+<p><b>Destination:</b> <span id="dest"></span></p>
+<p><b>Status:</b> <span id="status"></span></p>
+<p><b>Delivery Date:</b> <span id="deldate"></span></p>
+<p><b>Receiver:</b> <span id="receiver"></span></p>
+<p><b>Delivery AWB:</b> <span id="delawb"></span></p>
+
+<hr>
+
+<h3>Shipment Progress</h3>
+
+<table border="1" id="progress">
+<tr>
+<th>Date</th>
+<th>Time</th>
+<th>Location</th>
+<th>Activity</th>
+</tr>
+</table>
+
+<script>
 
 function track(){
 
-  const id = document.getElementById("trackingInput").value.trim();
+  const id = document.getElementById("trackId").value.trim();
 
   let db = JSON.parse(localStorage.getItem("shipments")) || {};
 
   const s = db[id];
 
   if(!s){
-    alert("Tracking ID not found");
+    alert("Tracking ID not recognized");
     return;
   }
 
-  document.getElementById("awbNo").innerText = s.awb;
-  document.getElementById("bookingDate").innerText = s.bookingDate;
+  document.getElementById("awb").innerText = s.awb;
+  document.getElementById("booking").innerText = s.bookingDate;
   document.getElementById("consignee").innerText = s.consignee;
-  document.getElementById("destination").innerText = s.destination;
+  document.getElementById("dest").innerText = s.destination;
   document.getElementById("status").innerText = s.status;
-  document.getElementById("deliveryDate").innerText = s.deliveryDate;
+  document.getElementById("deldate").innerText = s.deliveryDate;
   document.getElementById("receiver").innerText = s.receiver;
-  document.getElementById("deliveryAwb").innerText = s.deliveryAwb;
+  document.getElementById("delawb").innerText = s.deliveryAwb;
 
-  let table = document.getElementById("progressTable");
+  let table = document.getElementById("progress");
   table.innerHTML = `
   <tr>
-    <th>Date</th>
-    <th>Time</th>
-    <th>Location</th>
-    <th>Activity</th>
+  <th>Date</th>
+  <th>Time</th>
+  <th>Location</th>
+  <th>Activity</th>
   </tr>`;
 
   s.progress.forEach(p=>{
@@ -44,3 +80,6 @@ function track(){
 }
 
 </script>
+
+</body>
+</html>
