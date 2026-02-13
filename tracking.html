@@ -51,6 +51,8 @@ th{background:#28a745;color:#fff;}
 
 function track(){
  const id=trackId.value.trim();
+ if(!id){ alert("Enter Tracking ID"); return; }
+
  let db=JSON.parse(localStorage.getItem("shipments"))||{};
  const s=db[id];
  if(!s){ alert("Tracking ID not recognized"); return; }
@@ -65,7 +67,9 @@ function track(){
  delawb.innerText=s.deliveryAwb;
 
  let table=progress;
- table.innerHTML="<tr><th>Date</th><th>Time</th><th>Location</th><th>Activity</th></tr>";
+ table.innerHTML=`<tr>
+ <th>Date</th><th>Time</th><th>Location</th><th>Activity</th>
+ </tr>`;
 
  s.progress.forEach(p=>{
   let r=table.insertRow(-1);
@@ -75,6 +79,8 @@ function track(){
   r.insertCell(3).innerText=p.activity;
  });
 }
+
+window.onload=()=>trackId.value="";
 
 </script>
 
