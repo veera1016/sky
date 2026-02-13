@@ -2,18 +2,28 @@
 <html>
 <head>
 <title>Track Shipment</title>
+<style>
+body{font-family:Arial;background:#f4f4f4;}
+.container{width:80%;margin:auto;background:#fff;padding:20px;border-radius:8px;}
+input{padding:8px;width:300px;}
+button{background:#28a745;color:#fff;border:none;padding:8px 12px;}
+table{width:100%;border-collapse:collapse;margin-top:15px;}
+td,th{border:1px solid #28a745;padding:8px;}
+th{background:#28a745;color:#fff;}
+</style>
 </head>
+
 <body>
 
-<h2>Track Shipment</h2>
+<div class="container">
 
+<h2>Track Shipment</h2>
 <input id="trackId" placeholder="Enter AWB">
 <button onclick="track()">TRACK</button>
 
 <hr>
 
 <h3>AWB Details</h3>
-
 <p><b>AWB:</b> <span id="awb"></span></p>
 <p><b>Booking Date:</b> <span id="booking"></span></p>
 <p><b>Consignee:</b> <span id="consignee"></span></p>
@@ -26,8 +36,7 @@
 <hr>
 
 <h3>Shipment Progress</h3>
-
-<table border="1" id="progress">
+<table id="progress">
 <tr>
 <th>Date</th>
 <th>Time</th>
@@ -36,47 +45,35 @@
 </tr>
 </table>
 
+</div>
+
 <script>
 
 function track(){
+ const id=trackId.value.trim();
+ let db=JSON.parse(localStorage.getItem("shipments"))||{};
+ const s=db[id];
+ if(!s){ alert("Tracking ID not recognized"); return; }
 
-  const id = document.getElementById("trackId").value.trim();
+ awb.innerText=s.awb;
+ booking.innerText=s.bookingDate;
+ consignee.innerText=s.consignee;
+ dest.innerText=s.destination;
+ status.innerText=s.status;
+ deldate.innerText=s.deliveryDate;
+ receiver.innerText=s.receiver;
+ delawb.innerText=s.deliveryAwb;
 
-  let db = JSON.parse(localStorage.getItem("shipments")) || {};
+ let table=progress;
+ table.innerHTML="<tr><th>Date</th><th>Time</th><th>Location</th><th>Activity</th></tr>";
 
-  const s = db[id];
-
-  if(!s){
-    alert("Tracking ID not recognized");
-    return;
-  }
-
-  document.getElementById("awb").innerText = s.awb;
-  document.getElementById("booking").innerText = s.bookingDate;
-  document.getElementById("consignee").innerText = s.consignee;
-  document.getElementById("dest").innerText = s.destination;
-  document.getElementById("status").innerText = s.status;
-  document.getElementById("deldate").innerText = s.deliveryDate;
-  document.getElementById("receiver").innerText = s.receiver;
-  document.getElementById("delawb").innerText = s.deliveryAwb;
-
-  let table = document.getElementById("progress");
-  table.innerHTML = `
-  <tr>
-  <th>Date</th>
-  <th>Time</th>
-  <th>Location</th>
-  <th>Activity</th>
-  </tr>`;
-
-  s.progress.forEach(p=>{
-    let row = table.insertRow(-1);
-    row.insertCell(0).innerText = p.date;
-    row.insertCell(1).innerText = p.time;
-    row.insertCell(2).innerText = p.location;
-    row.insertCell(3).innerText = p.activity;
-  });
-
+ s.progress.forEach(p=>{
+  let r=table.insertRow(-1);
+  r.insertCell(0).innerText=p.date;
+  r.insertCell(1).innerText=p.time;
+  r.insertCell(2).innerText=p.location;
+  r.insertCell(3).innerText=p.activity;
+ });
 }
 
 </script>
