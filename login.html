@@ -1,32 +1,59 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Login</title>
+<title>Shipment Login</title>
+<style>
+body{
+    font-family: Arial;
+    background:#f2f2f2;
+}
+.login-box{
+    width:350px;
+    margin:120px auto;
+    background:white;
+    padding:20px;
+    border-radius:8px;
+    box-shadow:0 0 10px gray;
+    text-align:center;
+}
+input{
+    width:90%;
+    padding:10px;
+    margin:10px;
+}
+button{
+    padding:10px 20px;
+    background:#007bff;
+    color:white;
+    border:none;
+    cursor:pointer;
+}
+</style>
 </head>
 
 <body>
 
+<div class="login-box">
 <h2>Login</h2>
 
-<input id="username" placeholder="Username"><br><br>
-<input id="password" type="password" placeholder="Password"><br><br>
+<input type="text" id="user" placeholder="Username"><br>
+<input type="password" id="pass" placeholder="Password"><br>
 
 <button onclick="login()">Login</button>
 
 <p id="msg" style="color:red;"></p>
+</div>
 
 <script>
 function login(){
-  const u = document.getElementById("username").value;
-  const p = document.getElementById("password").value;
+    var u = document.getElementById("user").value;
+    var p = document.getElementById("pass").value;
 
-  if(u === "admin" && p === "admin123"){
-    sessionStorage.setItem("login","true");   // use sessionStorage (more reliable)
-    window.location.href = "dashboard.html";
-  }else{
-    document.getElementById("msg").innerText = "Invalid login";
-  }
+    if(u=="admin" && p=="admin123"){
+        window.location.href="dashboard.html";
+    }else{
+        document.getElementById("msg").innerHTML="Invalid Login";
+    }
 }
 </script>
 
