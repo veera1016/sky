@@ -85,20 +85,20 @@ function loadAWB(){
 }
 
 function updateAWB(){
- const id=awb.value.trim();
+ const id = awb.value.trim();
  if(!id){ alert("Enter AWB"); return; }
 
- let db=getDB();
- if(!db[id]) db[id]={progress:[]};
+ let db = getDB();
+ if(!db[id]) db[id] = { progress: [] };
 
- db[id].awb=id;
- db[id].bookingDate=date.value;
- db[id].consignee=consignee.value;
- db[id].destination=destination.value;
- db[id].status=status.value;
- db[id].deliveryDate=deliveryDate.value;
- db[id].receiver=receiver.value;
- db[id].deliveryAwb=deliveryAwb.value;
+ db[id].awb = id;
+ db[id].bookingDate = date.value;
+ db[id].consignee = consignee.value;
+ db[id].destination = destination.value;
+ db[id].status = status.value || db[id].status;   // STATUS FIX
+ db[id].deliveryDate = deliveryDate.value;
+ db[id].receiver = receiver.value;
+ db[id].deliveryAwb = deliveryAwb.value;
 
  saveDB(db);
  alert("Shipment Saved / Updated");
@@ -107,15 +107,15 @@ function updateAWB(){
 }
 
 function addProgress(){
- const id=awb.value.trim();
- let db=getDB();
+ const id = awb.value.trim();
+ let db = getDB();
  if(!db[id]){ alert("Save AWB first"); return; }
 
  db[id].progress.unshift({
-  date:p_date.value,
-  time:p_time.value,
-  location:p_location.value,
-  activity:p_activity.value
+  date: p_date.value,
+  time: p_time.value,
+  location: p_location.value,
+  activity: p_activity.value
  });
 
  saveDB(db);
@@ -125,25 +125,25 @@ function addProgress(){
 }
 
 function showProgress(id){
- let db=getDB();
- let table=progressTable;
+ let db = getDB();
+ let table = progressTable;
 
- table.innerHTML=`<tr>
+ table.innerHTML = `<tr>
  <th>Date</th><th>Time</th><th>Location</th><th>Activity</th><th>Delete</th>
  </tr>`;
 
  db[id].progress.forEach((p,i)=>{
-  let r=table.insertRow(-1);
-  r.insertCell(0).innerText=p.date;
-  r.insertCell(1).innerText=p.time;
-  r.insertCell(2).innerText=p.location;
-  r.insertCell(3).innerText=p.activity;
-  r.insertCell(4).innerHTML=`<button onclick="deleteProgress('${id}',${i})">Delete</button>`;
+  let r = table.insertRow(-1);
+  r.insertCell(0).innerText = p.date;
+  r.insertCell(1).innerText = p.time;
+  r.insertCell(2).innerText = p.location;
+  r.insertCell(3).innerText = p.activity;
+  r.insertCell(4).innerHTML = `<button onclick="deleteProgress('${id}',${i})">Delete</button>`;
  });
 }
 
 function deleteProgress(id,i){
- let db=getDB();
+ let db = getDB();
  db[id].progress.splice(i,1);
  saveDB(db);
  showProgress(id);
