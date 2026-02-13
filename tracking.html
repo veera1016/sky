@@ -1,37 +1,133 @@
-<script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Shipment Status | SKY EXPRESS</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&family=Outfit:wght@700;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  
+  <link rel="stylesheet" href="style.css" />
+  
+  <style>
+    /* Specific adjustments for the tracking result view */
+    .tracking-result-container {
+      padding: 140px 0 80px;
+      min-height: 80vh;
+      background: var(--bg);
+    }
+    .status-card {
+      background: var(--card);
+      padding: 40px;
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-strong);
+      max-width: 700px;
+      margin: 0 auto;
+      text-align: left;
+      border-left: 6px solid var(--primary);
+    }
+    .status-header {
+      border-bottom: 1px solid #eee;
+      padding-bottom: 20px;
+      margin-bottom: 25px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .status-content {
+      font-size: 1.15rem;
+      line-height: 1.8;
+      color: var(--navy);
+    }
+    .status-content strong {
+      color: var(--primary);
+    }
+    .back-btn {
+      margin-top: 30px;
+      display: inline-block;
+    }
+  </style>
+</head>
+<body>
 
-const urlParams = new URLSearchParams(window.location.search);
-const awb = urlParams.get('awb');
+  <header id="site-header">
+    <nav id="navbar" class="site-nav scrolled">
+      <div class="nav-inner centered-container">
+        <a class="brand" href="index.html">
+          <img src="assets/logo.png" alt="SKY EXPRESS logo" class="nav-logo" />
+          <div class="brand-text">
+            <span class="m-title">SKY EXPRESS</span>
+            <span class="s-title">INTERNATIONAL COURIERS</span>
+          </div>
+        </a>
+      </div>
+    </nav>
+  </header>
 
-fetch("https://raw.githubusercontent.com/veera1016/sky/main/data.json")
-.then(res=>res.json())
-.then(data=>{
+  <main class="tracking-result-container">
+    <div class="centered-container">
+      <div class="status-card">
+        <div class="status-header">
+          <h2 id="display-id" style="margin:0;">Checking ID...</h2>
+          <div class="s-icon" style="margin:0; font-size: 1.5rem;"><i class="fas fa-box-open"></i></div>
+        </div>
+        
+        <div id="status-box" class="status-content">
+          <p><i class="fas fa-spinner fa-spin"></i> Connecting to SKY EXPRESS database...</p>
+        </div>
 
-const ship = data.shipments.find(s=>s.awb==awb);
+        <a href="index.html" class="btn-outline back-btn">
+          <i class="fas fa-arrow-left"></i> Back to Home
+        </a>
+      </div>
+    </div>
+  </main>
 
-if(!ship){
-  document.getElementById("errorBox").style.display="block";
-  return;
-}
+  <footer id="site-footer">
+    <div class="centered-container footer-inner">
+      <div class="footer-bottom" style="border:none; padding:0;">
+        <small>© <span id="year"></span> SKY EXPRESS. All rights reserved.</small>
+      </div>
+    </div>
+  </footer>
 
-document.getElementById("awbNo").innerText = ship.awb;
-document.getElementById("bookingDate").innerText = ship.date;
-document.getElementById("consignee").innerText = ship.consignee;
-document.getElementById("destination").innerText = ship.destination;
-document.getElementById("status").innerText = ship.status;
-document.getElementById("deliveryDate").innerText = ship.deliveryDate;
-document.getElementById("receiver").innerText = ship.receiver;
-document.getElementById("deliveryAwb").innerText = ship.deliveryAwb;
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      // 1. Get Tracking ID from URL
+      const params = new URLSearchParams(window.location.search);
+      const trackId = (params.get('id') || "").toUpperCase().trim();
+      const displayEl = document.getElementById('display-id');
+      const statusBox = document.getElementById('status-box');
+      const yearEl = document.getElementById('year');
 
-let table = document.getElementById("progressTable");
+      if (yearEl) yearEl.textContent = new Date().getFullYear();
+      
+      if (!trackId) {
+        displayEl.innerText = "No ID Provided";
+        statusBox.innerHTML = "Please go back and enter a valid tracking number.";
+        return;
+      }
 
-ship.progress.forEach(p=>{
-let row = table.insertRow(-1);
-row.insertCell(0).innerText = p.date;
-row.insertCell(1).innerText = p.time;
-row.insertCell(2).innerText = p.location;
-row.insertCell(3).innerText = p.activity;
-});
+      displayEl.innerText = "Shipment: " + trackId;
 
-});
-</script>
+      // 2. Load Data from Admin Dashboard (LocalStorage)
+      const adminData = JSON.parse(localStorage.getItem('skyExpressData')) || {};
+
+      // 3. Hardcoded Fallback Data
+      const shipmentData = {
+        "SKY101": "<strong>Status:</strong> Arrived at Vizag Hub.<br><strong>Location:</strong> Sundar Nagar Sorting Office.",
+        "SKY102": "<strong>Status:</strong> In Transit.<br><strong>Location:</strong> Departed from Dubai International Airport.",
+        "NOT_FOUND": "<strong>Error:</strong> Tracking ID not recognized. <br>Please verify your number or contact support at +91 81215 92299."
+      };
+
+      // 4. Show Result after delay
+      setTimeout(() => {
+        const status = adminData[trackId] || shipmentData[trackId] || shipmentData["NOT_FOUND"];
+        statusBox.innerHTML = status;
+      }, 1000);
+    });
+  </script>
+</body>
+</html>
