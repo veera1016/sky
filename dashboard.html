@@ -2,83 +2,105 @@
 <html>
 <head>
 <title>Shipment Dashboard</title>
+<style>
+body{font-family:Arial;background:#f4f4f4;}
+.container{width:80%;margin:auto;background:#fff;padding:20px;border-radius:8px;}
+input{width:100%;padding:8px;margin:5px 0;}
+button{background:#28a745;color:#fff;border:none;padding:8px 12px;margin-top:5px;cursor:pointer;}
+table{width:100%;border-collapse:collapse;margin-top:15px;}
+td,th{border:1px solid #28a745;padding:8px;}
+th{background:#28a745;color:#fff;}
+</style>
 </head>
+
 <body>
+
+<div class="container">
+
+<h2>Search / Edit Shipment</h2>
+<input id="searchAwb" placeholder="Enter AWB">
+<button onclick="loadAWB()">Load</button>
+
+<hr>
 
 <h2>Manage Shipment</h2>
 
-<input type="text" id="awb" placeholder="AWB"><br>
-<input type="text" id="date" placeholder="Booking Date"><br>
-<input type="text" id="consignee" placeholder="Consignee"><br>
-<input type="text" id="destination" placeholder="Destination"><br>
-<input type="text" id="status" placeholder="Status"><br>
-<input type="text" id="deliveryDate" placeholder="Delivery Date"><br>
-<input type="text" id="receiver" placeholder="Receiver"><br>
-<input type="text" id="deliveryAwb" placeholder="Delivery AWB"><br>
+<input id="awb" placeholder="AWB">
+<input id="date" placeholder="Booking Date">
+<input id="consignee" placeholder="Consignee">
+<input id="destination" placeholder="Destination">
+<input id="status" placeholder="Status">
+<input id="deliveryDate" placeholder="Delivery Date">
+<input id="receiver" placeholder="Receiver">
+<input id="deliveryAwb" placeholder="Delivery AWB">
 
-<button onclick="updateAWB()">Save Shipment</button>
+<button onclick="updateAWB()">Save / Update Shipment</button>
 
 <hr>
 
 <h3>Add Progress</h3>
-
-<input type="date" id="p_date"><br>
-<input type="time" id="p_time"><br>
-<input type="text" id="p_location" placeholder="Location"><br>
-<input type="text" id="p_activity" placeholder="Activity"><br>
-
+<input type="date" id="p_date">
+<input type="time" id="p_time">
+<input id="p_location" placeholder="Location">
+<input id="p_activity" placeholder="Activity">
 <button onclick="addProgress()">Add Progress</button>
+
+</div>
 
 <script>
 
+function loadAWB(){
+ const awb = searchAwb.value.trim();
+ let db = JSON.parse(localStorage.getItem("shipments")) || {};
+ const s = db[awb];
+ if(!s){ alert("AWB not found"); return; }
+
+ awb.value=s.awb;
+ date.value=s.bookingDate;
+ consignee.value=s.consignee;
+ destination.value=s.destination;
+ status.value=s.status;
+ deliveryDate.value=s.deliveryDate;
+ receiver.value=s.receiver;
+ deliveryAwb.value=s.deliveryAwb;
+}
+
 function updateAWB(){
+ const id = awb.value.trim();
+ if(!id){ alert("Enter AWB"); return; }
 
-  const awb = document.getElementById("awb").value.trim();
+ let db = JSON.parse(localStorage.getItem("shipments")) || {};
 
-  if(!awb){
-    alert("Enter AWB");
-    return;
-  }
+ db[id]={
+  awb:id,
+  bookingDate:date.value,
+  consignee:consignee.value,
+  destination:destination.value,
+  status:status.value,
+  deliveryDate:deliveryDate.value,
+  receiver:receiver.value,
+  deliveryAwb:deliveryAwb.value,
+  progress:db[id]?.progress || []
+ };
 
-  let db = JSON.parse(localStorage.getItem("shipments")) || {};
-
-  db[awb] = {
-    awb: awb,
-    bookingDate: document.getElementById("date").value,
-    consignee: document.getElementById("consignee").value,
-    destination: document.getElementById("destination").value,
-    status: document.getElementById("status").value,
-    deliveryDate: document.getElementById("deliveryDate").value,
-    receiver: document.getElementById("receiver").value,
-    deliveryAwb: document.getElementById("deliveryAwb").value,
-    progress: []
-  };
-
-  localStorage.setItem("shipments", JSON.stringify(db));
-
-  alert("Shipment Saved");
+ localStorage.setItem("shipments",JSON.stringify(db));
+ alert("Shipment Saved / Updated");
 }
 
 function addProgress(){
+ const id=awb.value.trim();
+ let db=JSON.parse(localStorage.getItem("shipments"))||{};
+ if(!db[id]){ alert("Save AWB first"); return; }
 
-  const awb = document.getElementById("awb").value.trim();
+ db[id].progress.unshift({
+  date:p_date.value,
+  time:p_time.value,
+  location:p_location.value,
+  activity:p_activity.value
+ });
 
-  let db = JSON.parse(localStorage.getItem("shipments")) || {};
-  if(!db[awb]){
-    alert("Save AWB first");
-    return;
-  }
-
-  db[awb].progress.unshift({
-    date: document.getElementById("p_date").value,
-    time: document.getElementById("p_time").value,
-    location: document.getElementById("p_location").value,
-    activity: document.getElementById("p_activity").value
-  });
-
-  localStorage.setItem("shipments", JSON.stringify(db));
-
-  alert("Progress Added");
+ localStorage.setItem("shipments",JSON.stringify(db));
+ alert("Progress Added");
 }
 
 </script>
