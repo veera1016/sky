@@ -1,8 +1,8 @@
 <script>
 
 // protect page
-if(localStorage.getItem("login") !== "true"){
-   window.location.href="login.html";
+if(sessionStorage.getItem("login") !== "true"){
+  window.location.href = "login.html";
 }
 
 // ===== SAFE SAVE FUNCTION =====
