@@ -1,10 +1,19 @@
 <script>
 
+// protect page
+if(localStorage.getItem("login") !== "true"){
+   window.location.href="login.html";
+}
+
+// ===== SAFE SAVE FUNCTION =====
+
 const token = "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";
 const repo = "veera1016/sky";
 const file = "data.json";
 
 async function updateAWB(){
+
+try{
 
 const shipment = {
   awb: document.getElementById("awb").value,
@@ -18,15 +27,24 @@ const shipment = {
   progress: []
 };
 
-// Get current JSON
 let res = await fetch(`https://api.github.com/repos/${repo}/contents/${file}`);
+
+if(!res.ok){
+   alert("Cannot access GitHub file. Check token or repo.");
+   return;
+}
+
 let data = await res.json();
 let content = JSON.parse(atob(data.content));
 
-// Add shipment
-content.shipments.push(shipment);
+let index = content.shipments.findIndex(s => s.awb == shipment.awb);
 
-// Update GitHub file
+if(index >= 0){
+   content.shipments[index] = shipment;
+}else{
+   content.shipments.push(shipment);
+}
+
 await fetch(`https://api.github.com/repos/${repo}/contents/${file}`, {
   method:"PUT",
   headers:{
@@ -34,13 +52,18 @@ await fetch(`https://api.github.com/repos/${repo}/contents/${file}`, {
     "Content-Type":"application/json"
   },
   body:JSON.stringify({
-    message:"Add shipment",
+    message:"Save shipment "+shipment.awb,
     content:btoa(JSON.stringify(content, null, 2)),
     sha:data.sha
   })
 });
 
-alert("Saved permanently in GitHub!");
+alert("Saved Successfully!");
+
+}catch(e){
+  console.error(e);
+  alert("Error saving shipment. Check console.");
+}
 
 }
 
