@@ -167,6 +167,35 @@ row.insertCell(3).innerHTML = document.getElementById("p_activity").value;
 }
 
 </script>
+<script>
 
+function updateAWB(){
+
+  const awb = document.getElementById("awb").value.toUpperCase().trim();
+  const status = document.getElementById("status").value;
+  const location = document.getElementById("destination").value;
+
+  if(!awb){
+    alert("Enter AWB No");
+    return;
+  }
+
+  let data = JSON.parse(localStorage.getItem("skyExpressData")) || {};
+
+  data[awb] = "<strong>Status:</strong> " + status +
+              "<br><strong>Location:</strong> " + location;
+
+  localStorage.setItem("skyExpressData", JSON.stringify(data));
+
+  alert("Shipment Saved Successfully!");
+}
+
+function addProgress(){
+  alert("Progress not required");
+}
+
+</script>
 </body>
 </html>
+
+
