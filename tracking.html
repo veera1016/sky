@@ -61,7 +61,7 @@ function track(){
  booking.innerText=s.bookingDate;
  consignee.innerText=s.consignee;
  dest.innerText=s.destination;
- status.innerText=s.status;
+ document.getElementById("status").innerText = s.status;
  deldate.innerText=s.deliveryDate;
  receiver.innerText=s.receiver;
  delawb.innerText=s.deliveryAwb;
@@ -86,3 +86,4 @@ window.onload=()=>trackId.value="";
 
 </body>
 </html>
+
