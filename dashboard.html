@@ -2,6 +2,7 @@
 <html>
 <head>
 <title>Shipment Dashboard</title>
+
 <style>
 body{font-family:Arial;background:#f4f4f4;}
 .container{width:80%;margin:auto;background:#fff;padding:20px;border-radius:8px;}
@@ -11,6 +12,17 @@ table{width:100%;border-collapse:collapse;margin-top:15px;}
 td,th{border:1px solid #28a745;padding:8px;}
 th{background:#28a745;color:#fff;}
 </style>
+
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
+
+<script>
+const firebaseConfig = YOUR_FIREBASE_CONFIG_HERE;
+firebase.initializeApp(firebaseConfig);
+const db = firebase.database();
+</script>
+
 </head>
 
 <body>
@@ -59,93 +71,105 @@ th{background:#28a745;color:#fff;}
 
 <script>
 
-function getDB(){
-  return JSON.parse(localStorage.getItem("shipments")) || {};
-}
-function saveDB(db){
-  localStorage.setItem("shipments", JSON.stringify(db));
-}
-
+/* LOAD SHIPMENT FROM FIREBASE */
 function loadAWB(){
- const id = searchAwb.value.trim();
- let db = getDB();
- const s = db[id];
- if(!s){ alert("AWB not found"); return; }
 
- awb.value=s.awb;
- date.value=s.bookingDate;
- consignee.value=s.consignee;
- destination.value=s.destination;
- status.value=s.status;
- deliveryDate.value=s.deliveryDate;
- receiver.value=s.receiver;
- deliveryAwb.value=s.deliveryAwb;
-
- showProgress(id);
-}
-
-function updateAWB(){
- const id = awb.value.trim();
+ const id = document.getElementById("searchAwb").value.trim();
  if(!id){ alert("Enter AWB"); return; }
 
- let db = getDB();
- if(!db[id]) db[id] = { progress: [] };
+ db.ref("shipments/" + id).once("value").then(snapshot => {
 
- db[id].awb = id;
- db[id].bookingDate = date.value;
- db[id].consignee = consignee.value;
- db[id].destination = destination.value;
- db[id].status = document.getElementById("status").value.trim() || db[id].status;
- db[id].deliveryDate = deliveryDate.value;
- db[id].receiver = receiver.value;
- db[id].deliveryAwb = deliveryAwb.value;
+   const s = snapshot.val();
+   if(!s){ alert("AWB not found"); return; }
 
- saveDB(db);
- alert("Shipment Saved / Updated");
+   awb.value = s.awb || "";
+   date.value = s.bookingDate || "";
+   consignee.value = s.consignee || "";
+   destination.value = s.destination || "";
+   status.value = s.status || "";
+   deliveryDate.value = s.deliveryDate || "";
+   receiver.value = s.receiver || "";
+   deliveryAwb.value = s.deliveryAwb || "";
 
- showProgress(id);
+   showProgress(id);
+
+ });
+
 }
 
-function addProgress(){
- const id = awb.value.trim();
- let db = getDB();
- if(!db[id]){ alert("Save AWB first"); return; }
+/* SAVE SHIPMENT */
+function updateAWB(){
 
- db[id].progress.unshift({
+ const id = document.getElementById("awb").value.trim();
+ if(!id){ alert("Enter AWB"); return; }
+
+ db.ref("shipments/" + id).set({
+  awb: id,
+  bookingDate: date.value,
+  consignee: consignee.value,
+  destination: destination.value,
+  status: status.value,
+  deliveryDate: deliveryDate.value,
+  receiver: receiver.value,
+  deliveryAwb: deliveryAwb.value
+ });
+
+ alert("Shipment Saved to Firebase");
+
+}
+
+/* ADD PROGRESS */
+function addProgress(){
+
+ const id = document.getElementById("awb").value.trim();
+ if(!id){ alert("Enter AWB first"); return; }
+
+ const progressId = Date.now();
+
+ db.ref("shipments/" + id + "/progress/" + progressId).set({
   date: p_date.value,
   time: p_time.value,
   location: p_location.value,
   activity: p_activity.value
  });
 
- saveDB(db);
  alert("Progress Added");
-
  showProgress(id);
+
 }
 
+/* SHOW PROGRESS */
 function showProgress(id){
- let db = getDB();
- let table = progressTable;
+
+ let table = document.getElementById("progressTable");
 
  table.innerHTML = `<tr>
  <th>Date</th><th>Time</th><th>Location</th><th>Activity</th><th>Delete</th>
  </tr>`;
 
- db[id].progress.forEach((p,i)=>{
-  let r = table.insertRow(-1);
-  r.insertCell(0).innerText = p.date;
-  r.insertCell(1).innerText = p.time;
-  r.insertCell(2).innerText = p.location;
-  r.insertCell(3).innerText = p.activity;
-  r.insertCell(4).innerHTML = `<button onclick="deleteProgress('${id}',${i})">Delete</button>`;
+ db.ref("shipments/" + id + "/progress").once("value").then(snapshot => {
+
+   const data = snapshot.val();
+   if(!data) return;
+
+   Object.keys(data).reverse().forEach(key => {
+     const p = data[key];
+     let r = table.insertRow(-1);
+     r.insertCell(0).innerText = p.date;
+     r.insertCell(1).innerText = p.time;
+     r.insertCell(2).innerText = p.location;
+     r.insertCell(3).innerText = p.activity;
+     r.insertCell(4).innerHTML =
+       `<button onclick="deleteProgress('${id}','${key}')">Delete</button>`;
+   });
+
  });
+
 }
 
-function deleteProgress(id,i){
- let db = getDB();
- db[id].progress.splice(i,1);
- saveDB(db);
+/* DELETE PROGRESS */
+function deleteProgress(id,key){
+ db.ref("shipments/" + id + "/progress/" + key).remove();
  showProgress(id);
 }
 
