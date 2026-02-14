@@ -2,6 +2,7 @@
 <html>
 <head>
 <title>Track Shipment</title>
+
 <style>
 body{font-family:Arial;background:#f4f4f4;}
 .container{width:80%;margin:auto;background:#fff;padding:20px;border-radius:8px;}
@@ -11,6 +12,25 @@ table{width:100%;border-collapse:collapse;margin-top:15px;}
 td,th{border:1px solid #28a745;padding:8px;}
 th{background:#28a745;color:#fff;}
 </style>
+
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
+
+<script>
+const firebaseConfig = {
+  apiKey: "AIzaSyDHt3UjTNphPB86gi4jYhas55w3iTR8_hU",
+  authDomain: "shipment-tracking-87b0a.firebaseapp.com",
+  databaseURL: "https://shipment-tracking-87b0a-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "shipment-tracking-87b0a",
+  storageBucket: "shipment-tracking-87b0a.firebasestorage.app",
+  messagingSenderId: "20183050446",
+  appId: "1:20183050446:web:f868e25a1b07038fa2489f"
+};
+firebase.initializeApp(firebaseConfig);
+const db = firebase.database();
+</script>
+
 </head>
 
 <body>
@@ -50,40 +70,53 @@ th{background:#28a745;color:#fff;}
 <script>
 
 function track(){
- const id=trackId.value.trim();
+
+ const id = document.getElementById("trackId").value.trim();
  if(!id){ alert("Enter Tracking ID"); return; }
 
- let db=JSON.parse(localStorage.getItem("shipments"))||{};
- const s=db[id];
- if(!s){ alert("Tracking ID not recognized"); return; }
+ db.ref("shipments/" + id).once("value").then(snapshot => {
 
- awb.innerText=s.awb;
- booking.innerText=s.bookingDate;
- consignee.innerText=s.consignee;
- dest.innerText=s.destination;
- document.getElementById("status").innerText = s.status;
- deldate.innerText=s.deliveryDate;
- receiver.innerText=s.receiver;
- delawb.innerText=s.deliveryAwb;
+   const s = snapshot.val();
+   if(!s){
+     alert("Tracking ID not recognized");
+     return;
+   }
 
- let table=progress;
- table.innerHTML=`<tr>
- <th>Date</th><th>Time</th><th>Location</th><th>Activity</th>
- </tr>`;
+   // Fill details
+   document.getElementById("awb").innerText = s.awb || "";
+   document.getElementById("booking").innerText = s.bookingDate || "";
+   document.getElementById("consignee").innerText = s.consignee || "";
+   document.getElementById("dest").innerText = s.destination || "";
+   document.getElementById("status").innerText = s.status || "";
+   document.getElementById("deldate").innerText = s.deliveryDate || "";
+   document.getElementById("receiver").innerText = s.receiver || "";
+   document.getElementById("delawb").innerText = s.deliveryAwb || "";
 
- s.progress.forEach(p=>{
-  let r=table.insertRow(-1);
-  r.insertCell(0).innerText=p.date;
-  r.insertCell(1).innerText=p.time;
-  r.insertCell(2).innerText=p.location;
-  r.insertCell(3).innerText=p.activity;
+   // Load progress
+   let table = document.getElementById("progress");
+
+   table.innerHTML = `<tr>
+   <th>Date</th><th>Time</th><th>Location</th><th>Activity</th>
+   </tr>`;
+
+   if(s.progress){
+     Object.keys(s.progress).reverse().forEach(key=>{
+       const p = s.progress[key];
+       let r = table.insertRow(-1);
+       r.insertCell(0).innerText = p.date || "";
+       r.insertCell(1).innerText = p.time || "";
+       r.insertCell(2).innerText = p.location || "";
+       r.insertCell(3).innerText = p.activity || "";
+     });
+   }
+
  });
+
 }
 
-window.onload=()=>trackId.value="";
+window.onload = () => document.getElementById("trackId").value = "";
 
 </script>
 
 </body>
 </html>
-
